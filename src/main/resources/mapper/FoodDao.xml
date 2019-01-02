@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.niit.travel.dao.FoodDao">
+    <select id="getFoodList" resultType="com.niit.travel.entity.Food">
+        select *
+        from food
+    </select>
+
+    <select id="getFoodById" resultType="com.niit.travel.entity.Food">
+        select *
+        from food
+        where FId=#{foodId}
+    </select>
+
+    <select id="getFoodByCity" resultType="com.niit.travel.entity.Food">
+        select *
+        from food
+        where FCity=#{cityName}
+    </select>
+
+    <insert id="insertFood" parameterType="com.niit.travel.entity.Food" useGeneratedKeys="true" keyColumn="FId"
+            keyProperty="FId">
+        insert into
+        food(FName,FCity,FDes,FPic)
+        values
+        (#{FName},#{FCity},#{FDes},#{FPic})
+    </insert>
+
+    <update id="updateFood" parameterType="com.niit.travel.entity.Food">
+        update food
+        <set>
+            <if test="FCity != null">FCity=#{FCity}</if>
+            <if test="FDes != null">FDes=#{FDes}</if>
+            <if test="FName != null">FName=#{FName}</if>
+            <if test="FPic != null">FPic=#{FPic}</if>
+        </set>
+        where FId=#{FId}
+    </update>
+
+    <delete id="deleteFood">
+        delete from food
+        where FId=#{foodId}
+    </delete>
+</mapper>

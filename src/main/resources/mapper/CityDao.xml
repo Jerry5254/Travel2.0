@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.niit.travel.dao.CityDao">
+    <select id="getCityList" resultType="com.niit.travel.entity.City">
+        select *
+        from city
+    </select>
+
+    <select id="getCityById" resultType="com.niit.travel.entity.City">
+        select *
+        from city
+        where CId=#{cityId}
+    </select>
+
+    <select id="getCityByName" resultType="com.niit.travel.entity.City">
+        select *
+        from city
+        where CName=#{cityName}
+    </select>
+
+    <insert id="insertCity" parameterType="com.niit.travel.entity.City" useGeneratedKeys="true" keyProperty="CId"
+            keyColumn="CId">
+        insert into
+        city(CName,CDes)
+        values
+        (#{CName},#{CDes})
+    </insert>
+
+    <update id="updateCity" parameterType="com.niit.travel.entity.City">
+        update city
+        <set>
+            <if test="CName!=null">CName=#{CName},</if>
+            <if test="CStatus!=null">CStatus=#{CStatus},</if>
+            <if test="CDes!=null">CDes=#{CDes},</if>
+            <if test="CHitNumber != null">CHitNumber=#{CHitNumber}</if>
+            <if test="CPic!=null">CPic=#{CPic},</if>
+        </set>
+        where CId=#{CId}
+    </update>
+
+    <delete id="deleteCity">
+        delete from
+        city
+        where CId=#{cityId}
+    </delete>
+
+    <select id="getCityListInOrder" resultType="com.niit.travel.entity.City">
+        select *
+        from city
+        where CStatus='Y'
+    </select>
+</mapper>

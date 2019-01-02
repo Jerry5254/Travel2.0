@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.travel.dao.scenicDao">
+    <select id="queryScenic" resultType="com.niit.travel.entity.scenic">
+        SELECT  SId,SName,SCity,SDes,SPic
+        FROM scenic
+        ORDER BY SId
+        DESC
+    </select>
+    <select id="queryScenicByCity" resultType="com.niit.travel.entity.scenic">
+        SELECT  SId,SName,SCity,SDes,SPic
+        FROM scenic
+        WHERE
+        SCity=#{SCity}
+    </select>
+    <select id="getScenicById" resultType="com.niit.travel.entity.scenic">
+        SELECT  SId,SName,SCity,SDes,SPic
+        FROM scenic
+        WHERE
+        SId=#{SId}
+    </select>
+    <select id="getScenicByName" resultType="com.niit.travel.entity.scenic">
+        SELECT  SId,SName,SCity,SDes,SPic
+        FROM scenic
+        WHERE
+        SName=#{SName}
+    </select>
+
+
+    <insert id="insertScenic" useGeneratedKeys="true" keyProperty="SId"
+            keyColumn="SId" parameterType="com.niit.travel.entity.scenic">
+        INSERT INTO
+        scenic(SName,SCity,SDes,SPic)
+        VALUES
+        (#{SName},#{SCity},#{SDes},#{SPic})
+    </insert>
+    <update id="updateScenic" parameterType="com.niit.travel.entity.scenic">
+        update scenic
+        <set>
+            <if test="SName!=null">SName=#{SName},</if>
+            <if test="SCity!=null">SCity=#{SCity},</if>
+            <if test="SDes!=null">SDes=#{SDes},</if>
+            <if test="SPic!=null">SPic=#{SPic},</if>
+        </set>
+        where SId=#{SId}
+    </update>
+    <delete id="deleteScenic">
+        delete from
+        scenic
+        where
+        SId=#{SId}
+    </delete>
+</mapper>

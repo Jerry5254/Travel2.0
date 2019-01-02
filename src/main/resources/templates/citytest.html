@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>City</title>
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
+</head>
+<body>
+<div id="modify-city">
+    <span class="sui-dropdown dropdown-bordered">
+        <span class="dropdown-inner"><a role="button" id="cityshow-type" data-toggle="dropdown" href="#"
+                                        class="dropdown-toggle"><i
+                class="caret"></i><span>所有城市</span></a>
+    <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);"
+                                 id="show-all-city">所有城市</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);"
+                                 id="show-n-city">审核中城市</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);"
+                                   id="show-pass-city">已通过城市</a></li>
+    </ul>
+        </span>
+    </span>
+    <div id="city-list">
+        <table class="sui-table table-primary">
+            <thead>
+            <tr>
+                <th>城市ID</th>
+                <th>城市名字</th>
+                <th>城市状态</th>
+                <th>城市描述</th>
+                <th>用户点击量</th>
+                <th></th>
+
+            </tr>
+            </thead>
+            <tbody id="show-citylist">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div id="new-city">
+    <button id="J_addsuppliers" data-toggle="modal" data-target="#J_addsuppliersDialog" data-width="primary"
+            data-backdrop="static" class="sui-btn btn-primary">申请新城市
+    </button>
+    <div id="J_addsuppliersDialog" tabindex="-1" role="dialog" class="sui-modal hide fade" data-addsupplierurl="http://"
+         data-getsuppliersurl="http://xxx">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
+                    <h4 id="myModalLabel" class="modal-title">申请新城市</h4>
+                </div>
+                <div class="modal-body sui-form form-horizontal">
+                    <div class="control-group">
+                        <div class="controls">
+                            城市名字：<input type="text" id="new-city-name" placeholder="请输入城市名字">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            城市描述：<textarea id="new-city-desc" placeholder="请描述一下城市"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large J_addOneSupplier">申请
+                    </button>
+                    <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button id="add-scenic-btn" type="button" class="sui-btn btn-primary">新增景点</button>
+<div id="add-scenic" style="display: none">
+    <table>
+        <tr>
+            <td>景点名字</td>
+            <td><input type="text" placeholder="请输入景点名字" id="scenic-name"/></td>
+        </tr>
+        <tr>
+            <td>景点所在城市</td>
+            <td>
+                <select id="scenic-city">
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>描述景点</td>
+            <td><textarea id="scenic-desc"></textarea></td>
+        </tr>
+        <tr>
+            <td>请上传图片</td>
+            <td><input type="file" multiple="multiple" id="scenic-img"/></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" id="submit-scenic">提交</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="scenic-list">
+    <table class="sui-table table-primary">
+        <thead>
+        <tr>
+            <th>景点ID</th>
+            <th>景点名字</th>
+            <th>景点所在城市</th>
+            <th>景点描述</th>
+            <th></th>
+
+        </tr>
+        </thead>
+        <tbody id="show-sceniclist">
+        </tbody>
+    </table>
+</div>
+
+</body>
+<script type="text/javascript" src="js/city/citytest.js"></script>
+<script type="text/javascript" src="js/scenic/scenic.js"></script>
+</html>
