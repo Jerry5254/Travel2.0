@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/UserInfo.css}" rel="stylesheet">
+</head>
+<body>
+<div id="all">
+    <div id="top-panel">
+        <div id="user-icon">
+            <span id="open_btn"></span>
+        </div>
+    </div>
+</div>
+<div id="top">
+    <div>
+        <div id="altericon">
+            <div id="background" class="back">
+                <div id="div1" class="content">
+                    <div id="close">
+                        <span id="close-button">×</span>
+                        <h4>修改头像</h4>
+                    </div>
+
+                    <div id="div2">
+                        <div id="select">
+                            <span id="upload-select">上传头像</span>
+                            <span id="history-select">选择历史头像</span>
+                        </div>
+                        <div id="history" style="display: none;">
+                            <h3>历史头像</h3>
+                            <div id="history-icon"></div>
+                            <div class="hist">123</div>
+                        </div>
+                        <div id="upload">
+                            <input type="file" id="user-alter-icon"/>
+                        </div>
+                    </div>
+                    <h3 id="foot">
+                        <div id="up-but"><button id="alter-icon">确定</button> </div>
+                        <div id="hi-but" style="display: none;"><button id="alter-icon-history">确定</button></div>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div id="user-name"></div>
+    </div>
+</div>
+<div id="content">
+    <div id="left">
+
+    </div>
+    <div id="right">
+        <div id="userInfo">
+            <table>
+                <div id="userInfotable">
+
+                </div>
+                <tr><td colspan="2"><button id="submit">修改</button></td></tr>
+            </table>
+        </div>
+        <div id="userComment">
+            <table>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div id="userTravelNote">
+            <div id="travelNoteTable"></div>
+            <div id="addTravelNote"><button id="add" onclick="window.open('/travel/test')">Add</button> </div>
+        </div>
+        <div id="scoreNote">
+
+        </div>
+        <div id="showcomment">
+
+        </div>
+        <div id="showcollect">
+
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/jquery-1.10.0.js}"></script>
+<script type="text/javascript" th:src="@{/js/user/UserInfo.js}"></script>
+<!--修改头像弹窗-->
+<script>
+        var btn = document.getElementById('open_btn');
+        var div = document.getElementById('background');
+        var close = document.getElementById('close-button');
+        var his=document.getElementById('history-select');
+        var upload=document.getElementById('upload-select');
+        var up=document.getElementById('upload');
+        var h=document.getElementById('history');
+        var ubut=document.getElementById('up-but');
+        var hbut=document.getElementById('hi-but');
+
+        his.onclick=function s(){
+            up.style.display="none";
+            h.style.display="block";
+            hbut.style.display="block";
+            ubut.style.display="none";
+        }
+
+        upload.onclick=function q(){
+            up.style.display="block";
+            h.style.display="none";
+            hbut.style.display="none";
+            ubut.style.display="block";
+        }
+
+        btn.onclick = function show() {
+            div.style.display = "block";
+        }
+
+        close.onclick = function close() {
+            div.style.display = "none";
+        }
+
+        window.onclick = function close(e) {
+            if (e.target == div) {
+                div.style.display = "none";
+            }
+        }
+</script>
+</html>

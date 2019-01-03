@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+<h5>标题：<input type="text" id="title"/></h5>
+<div id="city">
+    城市：
+    <select id="scenic-city">
+    </select>
+</div>
+
+<h5>封面：<input type="file" id="pic"/> </h5>
+<script id="container" name="content" type="text/plain">
+
+</script>
+<script type="text/javascript" th:src="@{ueditor.config.js}"></script>
+<script type="text/javascript" th:src="@{ueditor.parse.js}"></script>
+<script type="text/javascript" th:src="@{ueditor.all.js}"></script>
+<script type="text/javascript" charset="utf-8" th:src="@{/lang/zh-cn/zh-cn.js}"></script>
+<script type="text/javascript">
+    var ue = UE.getEditor('container', {
+        toolbars: [
+            ['fullscreen', 'bold','undo','italic','underline',
+                'selectall','fontfamily','fontsize','insertimage','emotion',
+                'justifyleft','justifyright', 'justifycenter','justifyjustify', 'forecolor']
+        ],
+        autoHeightEnabled: true,
+        autoFloatEnabled: true});
+</script>
+<button id="submit">提交</button>
+<script type="text/javascript" th:src="@{jquery-1.10.0.js}"></script>
+<script type="text/javascript" th:src="@{/js/travelnote/addTravelNote.js}"></script>
+
+</body>
+</html>

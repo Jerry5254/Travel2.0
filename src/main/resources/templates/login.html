@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <table>
+            <tr>
+                <td>邮箱：</td>
+                <td><input type="text" name="email" id="email" /></td>
+            </tr>
+
+            <tr>
+                <td>密码：</td>
+                <td><input type="password" name="upass" id="upass" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button id="submit">登陆</button></td>
+            </tr>
+        </table>
+</body>
+<script type="text/javascript" th:src="@{/jquery-1.10.0.js}"></script>
+<script type="text/javascript" th:src="@{/js/user/Login.js}"></script>
+</html>

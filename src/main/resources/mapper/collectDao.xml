@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.travel.dao.collectDao">
+    <select id="queryCollectByUserTn" resultType="com.niit.travel.entity.collect">
+        SELECT  Collect_Id
+        FROM collect
+        <where>
+            Collect_Noteid=#{tn.TNId}
+            and Collect_Userid=#{Collect_Userid}
+        </where>
+    </select>
+    <resultMap id="collectToTn" type="com.niit.travel.entity.collect">
+        <id property="Collect_Id" column="Collect_Id"/>
+        <result property="Collect_Userid" column="Collect_Userid"/>
+        <result property="Collect_Date" column="Collect_Date"/>
+        <association property="tn" javaType="tn">
+            <id property="TNId" column="TNId"/>
+            <result property="TN_Title" column="TN_Title"/>
+            <result property="TN_Pics" column="TN_Pics"/>
+        </association>
+    </resultMap>
+    <select id="queryCollectByUser" resultMap="collectToTn">
+        SELECT  c.Collect_Id,c.Collect_Noteid,c.Collect_Userid,c.Collect_Date,t.TNId,t.TN_Title,t.TN_Pics
+        FROM collect c,tn t
+        <where>
+            c.Collect_Noteid=t.TNId
+            and c.Collect_Userid=#{Collect_Userid}
+        </where>
+    </select>
+    <insert id="insertCollect" useGeneratedKeys="true" keyProperty="COId"
+            keyColumn="COId" parameterType="com.niit.travel.entity.collect">
+        INSERT INTO
+        collect(Collect_Noteid,Collect_Userid,Collect_Date)
+        VALUES
+        (#{tn.TNId},#{Collect_Userid},#{Collect_Date})
+    </insert>
+    <delete id="deleteCollect">
+        delete from
+        collect
+        where
+        Collect_Id=#{Collect_Id}
+    </delete>
+</mapper>

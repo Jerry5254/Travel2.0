@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.travel.dao.usersDao">
+    <select id="queryUsers" resultType="com.niit.travel.entity.users">
+        SELECT  UId,UName,UPwd,UMobile,UMail,UGender,UIcon
+        FROM users
+        ORDER BY UId
+        DESC
+    </select>
+    <select id="queryUsersById" resultType="com.niit.travel.entity.users">
+        SELECT  UId,UName,UPwd,UMobile,UMail,UGender,UIcon
+        FROM users
+        WHERE
+        UId=#{UId}
+    </select>
+    <insert id="insertUsers" useGeneratedKeys="true" keyProperty="UId"
+            keyColumn="UId" parameterType="com.niit.travel.entity.users">
+        INSERT INTO
+        users(UName,UPwd,UMobile,UMail,UGender,UIcon)
+        VALUES
+        (#{UName},#{UPwd},#{UMobile},#{UMail},#{UGender},#{UIcon})
+    </insert>
+    <update id="updateUsers" parameterType="com.niit.travel.entity.users">
+        update users
+        <set>
+           <if test="UName!=null">UName=#{UName},</if>
+            <if test="UPwd!=null">UPwd=#{UPwd},</if>
+            <if test="UMobile!=null">UMobile=#{UMobile},</if>
+            <if test="UMail!=null">UMail=#{UMail},</if>
+            <if test="UIcon!=null">UIcon=#{UIcon},</if>
+        </set>
+        where UId=#{UId}
+    </update>
+    <delete id="deleteUsers">
+        delete from
+        users
+        where
+        UId=#{UId}
+    </delete>
+    <select id="queryUsersByMail" resultType="com.niit.travel.entity.users">
+        SELECT  UId,UName,UPwd,UMobile,UMail,UGender,UIcon
+        FROM users
+        WHERE
+        UMail=#{UMail}
+    </select>
+    <select id="checkEmail" resultType="com.niit.travel.entity.users">
+        SELECT  UId,UName,UPwd,UMobile,UMail,UGender,UIcon
+        FROM users
+        WHERE
+        UMail=#{UMail}
+    </select>
+</mapper>

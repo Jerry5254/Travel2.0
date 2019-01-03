@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+<script id="container" name="content" type="text/plain">
+
+</script>
+<script type="text/javascript" th:src="@{/ueditor.config.js}"></script>
+<script type="text/javascript" th:src="@{/ueditor.parse.js}"></script>
+<script type="text/javascript" th:src="@{/ueditor.all.js}"></script>
+<script type="text/javascript" charset="utf-8" th:src="@{/lang/zh-cn/zh-cn.js}"></script>
+<script type="text/javascript">
+    var ue = UE.getEditor('container', {
+        toolbars: [
+            ['fullscreen', 'bold','undo','italic','underline',
+                'selectall','fontfamily','fontsize','insertimage','emotion',
+                'justifyleft','justifyright', 'justifycenter','justifyjustify', 'forecolor']
+        ],
+        autoHeightEnabled: true,
+        autoFloatEnabled: true});
+</script>
+<button id="submit">修改</button>
+<script type="text/javascript" th:src="@{/jquery-1.10.0.js}"></script>
+<script type="text/javascript" th:src="@{/js/travelnote/updateTravelNote.js}"></script>
+</body>
+</html>

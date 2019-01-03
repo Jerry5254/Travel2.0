@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.travel.dao.commentDao">
+    <select id="queryComment" resultType="com.niit.travel.entity.comment">
+        SELECT  COId,COUser_id,CODate,COStatus,CODetails,COTN_id
+        FROM comment
+        ORDER BY COId
+        DESC
+    </select>
+    <select id="queryCommentByUser" resultType="com.niit.travel.entity.comment">
+        SELECT  COId,COUser_id,CODate,COStatus,CODetails,COTN_id
+        FROM comment
+        WHERE
+          COUser_id=#{COUser_id}
+    </select>
+    <resultMap id="commentTousers" type="com.niit.travel.entity.comment">
+        <id property="COId" column="COId"/>
+        <result property="CODate" column="CODate"/>
+        <result property="COStatus" column="COStatus"/>
+        <result property="CODetails" column="CODetails"/>
+        <result property="COTN_id" column="COTN_id"/>
+        <result property="COUser_id" column="COUser_id"/>
+        <association property="users" javaType="users">
+            <id property="UId" column="UId"/>
+            <result property="UName" column="UName"/>
+            <result property="UIcon" column="UIcon"/>
+        </association>
+    </resultMap>
+    <select id="queryCommentByNote" resultMap="commentTousers">
+        SELECT c.COId,c.CODate,c.COStatus,c.CODetails,c.COTN_id,u.UId,u.UName,u.UIcon
+        FROM comment c,users u
+        <where>
+            and c.COUser_id=u.UId
+            and c.COTN_id=#{COTN_id}
+        </where>
+    </select>
+    <insert id="insertComment" useGeneratedKeys="true" keyProperty="COId"
+            keyColumn="COId" parameterType="com.niit.travel.entity.comment">
+        INSERT INTO
+        comment(COUser_id,CODate,COStatus,CODetails,COTN_id)
+        VALUES
+        (#{users.UId},#{CODate},#{COStatus},#{CODetails},#{COTN_id})
+    </insert>
+    <delete id="deleteComment">
+        delete from
+        comment
+        where
+        COId=#{COId}
+    </delete>
+</mapper>

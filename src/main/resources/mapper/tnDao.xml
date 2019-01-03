@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.travel.dao.tnDao">
+    <resultMap id="TnTousers" type="com.niit.travel.entity.tn">
+        <id property="TNId" column="TNId"/>
+        <result property="TN_Date" column="TN_Date"/>
+        <result property="TN_Title" column="TN_Title"/>
+        <result property="TN_Content" column="TN_Content"/>
+        <result property="TN_Status" column="TN_Status"/>
+        <result property="TN_Pics" column="TN_Pics"/>
+        <result property="TNHit_Number" column="TNHit_Number"/>
+        <result property="TNCity" column="TNCity"/>
+        <association property="users" javaType="users">
+            <id property="UId" column="UId"/>
+            <result property="UName" column="UName"/>
+            <result property="UIcon" column="UIcon"/>
+        </association>
+    </resultMap>
+    <select id="queryTravelNote" resultMap="TnTousers">
+        SELECT  t.TNId,t.TNAuthor_id,t.TN_Date,t.TN_Title,t.TN_Content,t.TN_Status,t.TN_Pics,t.TNHit_Number,t.TNCity,
+        u.UId,u.UName,u.UIcon
+        FROM tn t,users u
+        where t.TNAuthor_id=u.UId
+        ORDER BY TNHit_Number
+        DESC
+    </select>
+    <select id="queryTravelNoteByCity" resultMap="TnTousers">
+        SELECT  t.TNId,t.TNAuthor_id,t.TN_Date,t.TN_Title,t.TN_Content,t.TN_Status,t.TN_Pics,t.TNHit_Number,t.TNCity,
+        u.UId,u.UName,u.UIcon
+        FROM tn t,users u
+        <where>
+            t.TNAuthor_id=u.UId
+            and t.TNCity=#{TNCity}
+        </where>
+    </select>
+    <insert id="insertTravelNote" useGeneratedKeys="true" keyProperty="TNId"
+            keyColumn="TNId" parameterType="com.niit.travel.entity.tn">
+        INSERT INTO
+        tn(TNAuthor_id,TN_Date,TN_Title,TN_Content,TN_Pics,TNCity,TN_Status)
+        VALUES
+        (#{users.UId},#{TN_Date},#{TN_Title},#{TN_Content},#{TN_Pics},#{TNCity},#{TN_Status})
+    </insert>
+    <update id="updateTravelNote" parameterType="com.niit.travel.entity.tn">
+        update tn
+        <set>
+            <if test="TN_Title!=null">TN_Title=#{TN_Title},</if>
+            <if test="TN_Content!=null">TN_Content=#{TN_Content},</if>
+            <if test="TN_Pics!=null">TN_Pics=#{TN_Pics},</if>
+            <if test="TNCity!=null">TNCity=#{TNCity},</if>
+            <if test="TN_Status!=null">TN_Status=#{TN_Status},</if>
+            <if test="TNHit_Number!=null">TNHit_Number=#{TNHit_Number},</if>
+        </set>
+        where TNId=#{TNId}
+    </update>
+    <delete id="deleteTravelNote">
+        delete from
+        tn
+        where
+        TNId=#{TNId}
+    </delete>
+    <select id="queryTravelNoteByAuthor" resultMap="TnTousers">
+        SELECT  t.TNId,t.TNAuthor_id,t.TN_Date,t.TN_Title,t.TN_Content,t.TN_Status,t.TN_Pics,t.TNHit_Number,t.TNCity,
+        u.UId,u.UName,u.UIcon
+        FROM tn t,users u
+        <where>
+            t.TNAuthor_id=u.UId
+            and t.TNAuthor_id=#{users.UId}
+        </where>
+    </select>
+    <select id="queryTravelNoteById" resultMap="TnTousers">
+        SELECT  t.TNId,t.TNAuthor_id,t.TN_Date,t.TN_Title,t.TN_Content,t.TN_Status,t.TN_Pics,t.TNHit_Number,t.TNCity,
+        u.UId,u.UName,u.UIcon
+        FROM tn t,users u
+        <where>
+            t.TNAuthor_id=u.UId
+            and t.TNId=#{TNId}
+        </where>
+    </select>
+    <select id="queryTravelNoteByStatus" resultType="com.niit.travel.entity.tn">
+        SELECT  TNId,TNAuthor_id,TN_Date,TN_Title,TN_Content,TN_Status,TN_Pics,TNHit_Number,TNCity
+        FROM tn
+        WHERE
+        TN_Status=#{TN_Status}
+    </select>
+</mapper>
