@@ -26,3 +26,4 @@ public interface scenicDao {
 
     int deleteScenic(int SId);
 }
+
