@@ -64,7 +64,7 @@ h3 {
 }
 #all{
     margin:0 auto;
-    width: 60%;
+    width: 50%;
 }
 #top-panel{
     height: 200px;
@@ -73,7 +73,107 @@ h3 {
 }
 #user-icon{
     padding-top: 15px;
+    margin-bottom: -20px;
 }
 #open_btn{
-    margin-left: 285px;
+    margin-left: 320px;
+}
+#user-name{
+    color: white;
+    text-align: center;
+}
+#second a{
+    text-decoration: none;
+    color: black;
+    font-family: monospace;
+}
+#second td{
+    padding-left: 145px;
+    padding-top: 10px;
+}
+#second{
+    height: 40px;
+    background-color: white;
+}
+body{
+    background-color: gainsboro;
+}
+#content-pane{
+    margin-top: 70px;
+}
+#noTn{
+    margin-left: 200px;
+    color:grey;
+    display: none;
+}
+.head{
+    text-align: center;
+    background-color: blueviolet;
+    height: 35px;
+    font-family: inherit;
+    color: white;
+    font-size: 20px;
+}
+#travelNoteTable a{
+    text-decoration: none;
+    color:black;
+    text-alin:center;
+}
+#travelNoteTable{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+}
+.operation{
+    background-color: rgba(97,9,9,0.66);
+}
+#userTravelNote{
+    background-color: white;
+}
+#manage-left{
+    background-color: white;
+    width: 25%;
+    float: left;
+}
+#manage-left a{
+    text-decoration: none;
+    color:black;
+}
+#manage-right{
+    float: right;
+    background-color: white;
+    width: 70%;
+}
+#manage-left table{
+    height:500px;
+    padding-left: 15px;
+}
+#collect{
+    background-color: white;
+}
+#showcollect a{
+    text-decoration: none;
+    font-size:25px;
+    color:black;
+}
+#showcollect img{
+    margin-top: 25px;
+    margin-left: 80px;
+    height: 200px;
+    width: 400px;
+}
+#time{
+    margin-left: 250px;
+    color: grey;
+}
+#showcollect{
+    margin-left: 115px;
+}
+.delete{
+    margin-left: 350px;
+    background-color: rgba(97,9,9,0.66);
+    border-radius: 8px;
+}
+.active{
+    background-color: orange;
 }

@@ -13,13 +13,14 @@ $(function() {
     deletecollect();
     deleteComment();
     deleteTn();
+    active();
 
     //获取用户信息
     function getUserInfo() {
         var url = '/travel/users/getuserbyid';
         $.getJSON(url, function (data) {
             if (data.success) {
-                var userNameHtml = '<h1>userName:' + data.user.uname + '</h1>';
+                var userNameHtml = '<h1>' + data.user.uname + '</h1>';
                 var userIconHtml = '<img height="120px" width="120px" style="border-radius: 55px" src="http://localhost:8080/travel/images/' + data.user.uicon + '"/>';
                 var userInfoHtml = '<tr><td></td><td><input id="user-id" value="' + data.user.uid + '"style="display: none"/> </td></tr>' +
                     '<tr><td>联系方式</td><td><input id="user-mobile" value=" ' + data.user.umobile + '"/></td></tr>' +
@@ -129,21 +130,24 @@ $(function() {
         var url = '/travel/tn/gettnlistbyauthor';
         $.getJSON(url, function (data) {
             if (data.success) {
-                var tnTableHtml = '';
-                var html = '</table>';
-                var html2 = '<table><tr class="head"><td>游记标题</td><td>提交日期</td><td>游记状态</td><td colspan="2">操作</td></tr>';
-                data.tnlist.map(function (item, index) {
-                    tnTableHtml +=
-                        '<tr><td><a href="/travel/tn/totravelnote?travelnoteid=' + item.tnid + '" >' + item.tn_Title + '</a></td>' +
-                        '<td>' + item.tn_Date + '</td>' +
-                        '<td>' + item.tn_Status + '</td>' +
-                        '<td><a href="/travel/tn/toupdatetravelnote?travelnoteid=' + item.tnid + '" >修改</a></td>' +
-                        '<td><a id="delete" href="javascript:void(0);" data-id="'+item.tnid+'" >删除</a></td></tr>';
-                    $('#travelNoteTable').html(html2 + tnTableHtml + html);
-                });
-            } else {
-                var html = '<h3>您还未写过游记...</h3>';
-                $('#addTravelNote').html(html);
+                console.log(data.tnStatus);
+                if((data.tnStatus)=='no'){
+                   $('#noTn').attr("style","display:block");
+                }else{
+                    $('#hasTn').attr("style","display:block")
+                    var tnTableHtml = '';
+                    var html = '</table>';
+                    var html2 = '<table width="700px" border="1" style=" margin-left:25px;"><tr class="head"><td>游记标题</td><td>提交日期</td><td>游记状态</td><td colspan="2">操作</td></tr>';
+                    data.tnlist.map(function (item, index) {
+                        tnTableHtml +=
+                            '<tr style="height: 30px"><td><a href="/travel/tn/totravelnote?travelnoteid=' + item.tnid + '" >' + item.tn_Title + '</a></td>' +
+                            '<td>' + item.tn_Date + '</td>' +
+                            '<td>' + item.tn_Status + '</td>' +
+                            '<td class="operation"><a href="/travel/tn/toupdatetravelnote?travelnoteid=' + item.tnid + '" >修改</a></td>' +
+                            '<td class="operation"><a id="delete" href="javascript:void(0);" data-id="'+item.tnid+'" >删除</a></td></tr>';
+                        $('#travelNoteTable').html(html2 + tnTableHtml + html);
+                    });
+                }
             }
         });
     }
@@ -223,12 +227,12 @@ $(function() {
             if (data.success) {
                 var html = '';
                 data.collectlist.map(function (item, index) {
-                    html += '<hr style="height:1px;border:none;border-top:1px solid #555555;" />' +
-                        '<a href="/travel/tn/totravelnote?travelnoteid=' + item.tn.tnid + '" >' + item.tn.tn_Title + '</a><br/>' +
-                        '<img src="http://localhost:8080/travel/images/'
-                        + item.tn.tn_Pics + '"/></br><div>'
+                    html += '<a href="/travel/tn/totravelnote?travelnoteid=' + item.tn.tnid + '" >' + item.tn.tn_Title + '</a><br/>' +
+                        '<a href="/travel/tn/totravelnote?travelnoteid=' + item.tn.tnid + '" ><img src="http://localhost:8080/travel/images/'
+                        + item.tn.tn_Pics + '"/></a></br><div id="time">'
                         + item.collect_Date
-                        + '</div><a href="javascript:void(0);" data-id="'+item.collect_Id+'">删除</a>';
+                        + '</div><a class="delete" href="javascript:void(0);" data-id="'+item.collect_Id+'">删除</a>' +
+                        '<hr style="height:1px;border:none;border-top:1px solid #555555;" />';
                 });
                 $('#showcollect').html(html);
             }
@@ -286,6 +290,62 @@ $(function() {
                     }
                 });
             }
+        });
+    }
+
+    function active(){
+        $('#travelnote').click(function(){
+           $('#travelnote').addClass("active");
+           $('#mycollect').removeClass("active");
+           $('#edit').removeClass("active");
+           $('#userTravelNote').attr("style","display:block");
+           $('#manage').attr("style","display:none");
+           $('#collect').attr("style","display:none");
+        });
+
+        $('#mycollect').click(function(){
+            $('#mycollect').addClass("active");
+            $('#travelnote').removeClass("active");
+            $('#edit').removeClass("active");
+            $('#userTravelNote').attr("style","display:none");
+            $('#manage').attr("style","display:none");
+            $('#collect').attr("style","display:block");
+        });
+
+        $('#edit').click(function(){
+            $('#edit').addClass("active");
+            $('#travelnote').removeClass("active");
+            $('#mycollect').removeClass("active");
+            $('#userTravelNote').attr("style","display:none");
+            $('#manage').attr("style","display:block");
+            $('#collect').attr("style","display:none");
+        });
+
+        $('#mage-info').click(function(){
+            $('#mage-info').addClass("active");
+            $('#mage-com').removeClass("active");
+            $('#mage-score').removeClass("active");
+            $('#userInfo').attr("style","display:block");
+            $('#showcomment').attr("style","display:none");
+            $('#scoreNote').attr("style","display:none");
+        });
+
+        $('#mage-com').click(function(){
+            $('#mage-info').removeClass("active");
+            $('#mage-com').addClass("active");
+            $('#mage-score').removeClass("active");
+            $('#userInfo').attr("style","display:none");
+            $('#showcomment').attr("style","display:block");
+            $('#scoreNote').attr("style","display:none");
+        });
+
+        $('#mage-score').click(function(){
+            $('#mage-info').removeClass("active");
+            $('#mage-com').removeClass("active");
+            $('#mage-score').addClass("active");
+            $('#userInfo').attr("style","display:none");
+            $('#showcomment').attr("style","display:none");
+            $('#scoreNote').attr("style","display:block");
         });
     }
 
