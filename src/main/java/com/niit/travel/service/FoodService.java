@@ -14,6 +14,8 @@ public interface FoodService {
 
     Food getFoodById(Integer foodId);
 
+    Food getFoodByName(String foodName);
+
     List<Food> getFoodByCity(String cityName);
 
     boolean addFood(Food food);

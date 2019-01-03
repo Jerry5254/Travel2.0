@@ -32,7 +32,6 @@ public class CityController {
     private CityService cityService;
 
     @RequestMapping(value = "/citylist", method = RequestMethod.GET)
-    @ResponseBody
     public Map<String, Object> getCityList() {
         Map<String, Object> modelMap = new HashMap<>();
         try {
@@ -270,7 +269,56 @@ public class CityController {
     @RequestMapping(value = "/addpoint", method = RequestMethod.GET)
     public Map<String, Object> addPoint(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<>();
+        int cityId = Integer.parseInt(request.getParameter("cityId"));
+        City city = cityService.getCityById(cityId);
+        City updateCity = new City();
+        updateCity.setCId(cityId);
+        int cityHN = city.getCHitNumber();
+        updateCity.setCHitNumber(cityHN + 1);
+        boolean result = cityService.modifyCity(updateCity);
+        if (result) {
+            modelMap.put("success", true);
+        } else {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "增加点击量失败");
+
+        }
+
+        return modelMap;
+
+    }
+
+    @RequestMapping(value = "/indexcitylist", method = RequestMethod.GET)
+    public Map<String, Object> getIndexCityList() {
+        Map<String, Object> modelMap = new HashMap<>();
+        try {
+            List<City> cityList = cityService.getCityInOrderByHn();
+            List<City> effecedList = new ArrayList<>();
+            String cityFirstPic;
+            int flag = 0;
+            for (City city : cityList) {
+                if (flag > 3) {
+                    break;
+                }
+                if (city.getCStatus().equals("Y")) {
+                    city.setCStatus("审核通过");
+                    effecedList.add(city);
+                    if (city.getCPic() != null && !city.getCPic().equals("")) {
+                        String cityPics = city.getCPic();
+                        String pic[] = cityPics.split(";");
+                        city.setCPic(pic[0]);
+                    }
+                }
+                flag++;
+            }
+            modelMap.put("cityList", effecedList);
+            modelMap.put("success", true);
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        }
         return modelMap;
     }
+
 
 }

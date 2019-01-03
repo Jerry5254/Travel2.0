@@ -31,6 +31,11 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
+    public Food getFoodByName(String foodName) {
+        return foodDao.getFoodByName(foodName);
+    }
+
+    @Override
     public List<Food> getFoodByCity(String cityName) {
         return foodDao.getFoodByCity(cityName);
     }

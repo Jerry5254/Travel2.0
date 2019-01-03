@@ -25,4 +25,6 @@ public interface CityService {
     List<City> getOrderCity(String property);
 
     boolean deletePic(int cityId, String addr);
+
+    List<City> getCityInOrderByHn();
 }

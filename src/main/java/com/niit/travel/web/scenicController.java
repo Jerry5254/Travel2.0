@@ -207,5 +207,30 @@ public class scenicController {
         return modelMap;
     }
 
+    @RequestMapping(value = "/indexsceniclist", method = RequestMethod.GET)
+    public Map<String, Object> getIndexScenicList() {
+        Map<String, Object> modelMap = new HashMap<>();
+        try {
+            List<scenic> scenicList = scenicservice.queryScenic();
+            List<scenic> effecedList = new ArrayList<>();
+            int flag = 0;
+            for (scenic showScenic : scenicList) {
+                if (flag > 2) {
+                    break;
+                }
+                String[] pics = showScenic.getSPic().split(";");
+                showScenic.setSPic(pics[0]);
+                effecedList.add(showScenic);
+                flag++;
+            }
+            modelMap.put("scenicList", effecedList);
+            modelMap.put("success", true);
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        }
+        return modelMap;
+    }
+
 
 }

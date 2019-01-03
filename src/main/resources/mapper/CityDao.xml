@@ -9,6 +9,10 @@
         from city
     </select>
 
+    <select id="getCityListInOrderByHN" resultType="com.niit.travel.entity.City">
+        select * from city ORDER BY CHitNumber desc;
+    </select>
+
     <select id="getCityById" resultType="com.niit.travel.entity.City">
         select *
         from city

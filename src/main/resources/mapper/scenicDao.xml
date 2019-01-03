@@ -7,7 +7,6 @@
         SELECT  SId,SName,SCity,SDes,SPic
         FROM scenic
         ORDER BY SId
-        DESC
     </select>
     <select id="queryScenicByCity" resultType="com.niit.travel.entity.scenic">
         SELECT  SId,SName,SCity,SDes,SPic
