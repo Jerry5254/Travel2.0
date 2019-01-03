@@ -102,8 +102,13 @@ public class tnController {
         Map<String,Object>modelMap=new HashMap<String,Object>();
         Integer userid= (Integer) session.getAttribute("id");//从session中获取游记id
         List<tn> tnList=tnservice.getTnByAuthorId(userid);
-        modelMap.put("success",true);
-        modelMap.put("tnlist",tnList);
+        if(tnList.size()==0){
+            modelMap.put("success",true);
+            modelMap.put("tnStatus","no");
+        }else{
+            modelMap.put("success",true);
+            modelMap.put("tnlist",tnList);
+        }
         return modelMap;
     }
 

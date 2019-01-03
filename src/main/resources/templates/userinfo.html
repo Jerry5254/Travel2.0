@@ -10,80 +10,92 @@
     <div id="top-panel">
         <div id="user-icon">
             <span id="open_btn"></span>
-        </div>
-    </div>
-</div>
-<div id="top">
-    <div>
-        <div id="altericon">
-            <div id="background" class="back">
-                <div id="div1" class="content">
-                    <div id="close">
-                        <span id="close-button">×</span>
-                        <h4>修改头像</h4>
-                    </div>
+            <div id="altericon">
+                <div id="background" class="back">
+                    <div id="div1" class="content">
+                        <div id="close">
+                            <span id="close-button">×</span>
+                            <h4>修改头像</h4>
+                        </div>
 
-                    <div id="div2">
-                        <div id="select">
-                            <span id="upload-select">上传头像</span>
-                            <span id="history-select">选择历史头像</span>
+                        <div id="div2">
+                            <div id="select">
+                                <span id="upload-select">上传头像</span>
+                                <span id="history-select">选择历史头像</span>
+                            </div>
+                            <div id="history" style="display: none;">
+                                <h3>历史头像</h3>
+                                <div id="history-icon"></div>
+                                <div class="hist">123</div>
+                            </div>
+                            <div id="upload">
+                                <input type="file" id="user-alter-icon"/>
+                            </div>
                         </div>
-                        <div id="history" style="display: none;">
-                            <h3>历史头像</h3>
-                            <div id="history-icon"></div>
-                            <div class="hist">123</div>
-                        </div>
-                        <div id="upload">
-                            <input type="file" id="user-alter-icon"/>
-                        </div>
+                        <h3 id="foot">
+                            <div id="up-but"><button id="alter-icon">确定</button> </div>
+                            <div id="hi-but" style="display: none;"><button id="alter-icon-history">确定</button></div>
+                        </h3>
                     </div>
-                    <h3 id="foot">
-                        <div id="up-but"><button id="alter-icon">确定</button> </div>
-                        <div id="hi-but" style="display: none;"><button id="alter-icon-history">确定</button></div>
-                    </h3>
                 </div>
             </div>
         </div>
-    </div>
-    <div>
         <div id="user-name"></div>
-    </div>
-</div>
-<div id="content">
-    <div id="left">
-
-    </div>
-    <div id="right">
-        <div id="userInfo">
-            <table>
-                <div id="userInfotable">
-
-                </div>
-                <tr><td colspan="2"><button id="submit">修改</button></td></tr>
-            </table>
-        </div>
-        <div id="userComment">
+        <div id="second">
             <table>
                 <tr>
-                    <td></td>
+                    <td><b><a href="javascript:void(0);" id="travelnote" class="active">我的游记</a></b></td>
+                    <td><b><a href="javascript:void(0);" id="mycollect">我的收藏</a></b></td>
+                    <td><b><a href="javascript:void(0);" id="edit">管理中心</a></b></td>
                 </tr>
             </table>
         </div>
+    </div>
+    <div id="content-pane">
         <div id="userTravelNote">
-            <div id="travelNoteTable"></div>
-            <div id="addTravelNote"><button id="add" onclick="window.open('/travel/test')">Add</button> </div>
+            <div id="hasTn" style="display: none; text-align: center;">
+                <div id="travelNoteTable"></div>
+                <a href="/travel/test"><img width="100px" height="100px" style="margin-left: 330px" src="http://localhost:8080/travel/images/local/addtravelnote.png"/></a>
+            </div>
+            <div id="noTn">
+                <p>您还没有写过游记..点击下方图片开始分享您的旅程吧！</p>
+                <a href="/travel/test"><img src="http://localhost:8080/travel/images/local/addtravelnote.png"/></a>
+            </div>
         </div>
-        <div id="scoreNote">
 
+        <div id="manage" style="display: none">
+            <div id="manage-left">
+                <table>
+                    <tr><td><a href="javascript:void(0);" id="mage-info" class="active"><b>管理我的信息</b></a></td></tr>
+                    <tr><td><a href="javascript:void(0);" id="mage-com"><b>管理我的评论</b></a></td></tr>
+                    <tr><td><a href="javascript:void(0);" id="mage-score"><b>查看我的评分</b></a></td></tr>
+                </table>
+            </div>
+            <div id="manage-right">
+                <div id="userInfo">
+                    <table>
+                        <div id="userInfotable"></div>
+                        <tr><td colspan="2"><button id="submit">修改</button></td></tr>
+                    </table>
+                </div>
+                <!--<div id="userComment">-->
+                    <!--<table>-->
+                        <!--<tr>-->
+                            <!--<td></td>-->
+                        <!--</tr>-->
+                    <!--</table>-->
+                <!--</div>-->
+                <div id="scoreNote"></div>
+                <div id="showcomment"></div>
+            </div>
         </div>
-        <div id="showcomment">
 
-        </div>
-        <div id="showcollect">
-
+        <div id="collect" style="display: none">
+            <div id="showcollect"></div>
         </div>
     </div>
 </div>
+
 </body>
 <script type="text/javascript" th:src="@{/jquery-1.10.0.js}"></script>
 <script type="text/javascript" th:src="@{/js/user/UserInfo.js}"></script>
