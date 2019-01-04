@@ -1,10 +1,26 @@
 $(function () {
     var registerFoodUrl = '/travel/food/addfood';
+    var getPassCityListUrl = '/travel/city/citylist';
+    getCityForFood(getPassCityListUrl);
+
+
+    function getCityForFood(url) {
+        $.getJSON(url, function (data) {
+            if (data.success) {
+                var showCityHtml = '';
+                data.cityList.map(function (item, index) {
+                    showCityHtml += '<option value="' + item.cname + '">' + item.cname + '</option>';
+                });
+                $('#food-city').html(showCityHtml);
+            }
+        });
+    }
+
+
     $('#submit').click(function () {
         var food = {};
         food.fname = $('#food-name').val();
         food.fcity = $('#food-city').val();
-        food.fdes = $('#food-desc').val();
 
         var foodImg = $('#food-img')[0].files[0];
         var formData = new FormData();

@@ -38,7 +38,6 @@ public class FoodDaoTest {
     public void insertFood() {
         Food food = new Food();
         food.setFCity("广州");
-        food.setFDes("超级好吃哇");
         food.setFName("肠粉");
         food.setFPic(null);
         int effectedNum = foodDao.insertFood(food);

@@ -9,7 +9,6 @@ public class Food {
     private Integer FId;
     private String FName;
     private String FCity;
-    private String FDes;
     private String FPic;
 
     public Integer getFId() {
@@ -34,14 +33,6 @@ public class Food {
 
     public void setFCity(String FCity) {
         this.FCity = FCity;
-    }
-
-    public String getFDes() {
-        return FDes;
-    }
-
-    public void setFDes(String FDes) {
-        this.FDes = FDes;
     }
 
     public String getFPic() {

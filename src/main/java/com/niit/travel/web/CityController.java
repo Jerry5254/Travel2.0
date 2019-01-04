@@ -137,11 +137,18 @@ public class CityController {
         return modelMap;
     }
 
-    @RequestMapping(value = "/city_name", method = RequestMethod.GET)
-    public Map<String, Object> getCityByName(String cityName) {
+    @RequestMapping(value = "/getcitybyname", method = RequestMethod.GET)
+    public Map<String, Object> getCityByName(HttpServletRequest request) {
+        String cityName = request.getParameter("cityName");
         Map<String, Object> modelMap = new HashMap<>();
-        City city = cityService.getCityByName(cityName);
-        modelMap.put("city", city);
+        if (cityService.getCityByName(cityName) != null && cityService.getCityByName(cityName).getCId() > 0) {
+            City city = cityService.getCityByName(cityName);
+            modelMap.put("city", city);
+            modelMap.put("success", true);
+        } else {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "不存在这个城市");
+        }
         return modelMap;
     }
 
