@@ -70,8 +70,8 @@ $(function () {
                 var cityHtml = '';
                 data.scenicList.map(function (item, index) {
                     cityHtml += '<div style="width: 220px;margin-right: 45px;display:block;float:left">\n' +
-                        '                <img data-id="' + item.sid + '" src="http://localhost:8080/travel/images/' + item.spic + '" style="cursor:pointer;width: 220px;height:140px;border-radius: 5px"/>\n' +
-                        '                <p data-id="' + item.sid + '" style="font-family: \'微软雅黑 Light\';font-size: 18px;text-align: center;cursor:pointer;">' + item.sname + '</p>\n' +
+                        '                <img data-id="' + item.sid + '" src="http://localhost:8080/travel/images/' + item.spic + '" style="width: 220px;height:140px;border-radius: 5px"/>\n' +
+                        '                <p data-id="' + item.sid + '" style="font-family: \'微软雅黑 Light\';font-size: 18px;text-align: center">' + item.sname + '</p>\n' +
                         '            </div>';
                 });
                 $('#show-scenic').html(cityHtml);
@@ -89,8 +89,8 @@ $(function () {
                     var cityHtml = '';
                     data.cityfoodList.map(function (item, index) {
                         cityHtml += '<div style="width: 220px;margin-right: 45px;display:block;float:left">\n' +
-                            '                <img data-id="' + item.fid + '" src="http://localhost:8080/travel/images/' + item.fpic + '" style="cursor:pointer;width: 220px;height:140px"/>\n' +
-                            '                <p data-id="' + item.fid + '" style="font-family: \'微软雅黑 Light\';font-size: 18px;text-align: center;cursor:pointer;">' + item.fname + '</p>\n' +
+                            '                <img data-id="' + item.fid + '" src="http://localhost:8080/travel/images/' + item.fpic + '" style="width: 220px;height:140px"/>\n' +
+                            '                <p data-id="' + item.fid + '" style="font-family: \'微软雅黑 Light\';font-size: 18px;text-align: center;">' + item.fname + '</p>\n' +
                             '            </div>';
 
                     });

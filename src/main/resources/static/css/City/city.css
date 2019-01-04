@@ -1,0 +1,71 @@
+#city-nav {
+    width: 190px;
+}
+
+#city-nav li {
+    width: 60px;
+    float: left;
+    display: block;
+}
+
+#city-intro-word {
+    color: #FFA54F;
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.big-word {
+    color: #FFA54F;
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+#line {
+    border: 1px solid #E0EEE0;
+    background: #E0EEE0;
+    width: 180px;
+}
+
+.line {
+    border: 1px solid #E0EEE0;
+    background: #E0EEE0;
+    width: 180px;
+}
+
+#line2 {
+    border: 0.6px solid #E0EEE0;
+    background: #E0EEE0;
+    width: 100%;
+}
+
+#intro-desc {
+    width: 480px;
+    float: left;
+    height: 328px;
+}
+
+#intro-pic {
+    width: 480px;
+    float: right;
+    height: 328px;
+}
+
+#intro-city {
+    color: #FFA54F;
+    font-size: 25px;
+    margin-bottom: 20px;
+    margin-left: 5px;
+    font-family: 微软雅黑;
+}
+
+#intro-article {
+    font-family: 微软雅黑 Light;
+    font-size: 18px;
+    margin-top: 30px;
+    margin-left: 8px;
+}
+
+.show {
+    margin-top: 75px;
+    width: 820px;
+}

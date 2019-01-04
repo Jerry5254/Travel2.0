@@ -98,10 +98,11 @@ public class FoodController {
         List<Food> foodList = null;
         try {
             foodList = foodService.getFoodByCity(cityName);
-            if (foodList != null) {
+            if (foodList != null && !foodList.equals("")) {
                 modelMap.put("cityfoodList", foodList);
                 modelMap.put("success", true);
             } else {
+                System.out.println("没有东西哦");
                 modelMap.put("success", false);
                 modelMap.put("errMsg", "该城市暂时没有推荐美食哦");
             }

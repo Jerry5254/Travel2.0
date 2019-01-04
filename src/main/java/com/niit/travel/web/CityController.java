@@ -114,8 +114,18 @@ public class CityController {
             int cityId = Integer.parseInt(cityIdString);
             City city = cityService.getCityById(cityId);
             if (city != null && city.getCId() > 0) {
-                modelMap.put("city", city);
-                modelMap.put("success", true);
+                if (city.getCPic() == null || city.getCPic().equals("")) {
+                    modelMap.put("picAmount", 0);
+                    modelMap.put("city", city);
+                    modelMap.put("success", true);
+                } else {
+                    String[] cityPics = city.getCPic().split(";");
+                    int cityPicAmount = cityPics.length;
+                    modelMap.put("picAmount", cityPicAmount);
+                    modelMap.put("picList", cityPics);
+                    modelMap.put("city", city);
+                    modelMap.put("success", true);
+                }
             } else {
                 modelMap.put("success", false);
                 modelMap.put("errMsg", "城市获取失败");

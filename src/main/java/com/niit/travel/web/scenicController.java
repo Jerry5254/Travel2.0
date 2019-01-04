@@ -40,10 +40,27 @@ public class scenicController {
     }
 
     @RequestMapping(value = "/getscenicbycity", method = RequestMethod.GET)
-    private Map<String, Object> scn(String city) {
+    private Map<String, Object> scn(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        List<scenic> list = scenicservice.queryScenicByCity(city);
-        modelMap.put("sceniclist_city", list);
+        String city = request.getParameter("cityName");
+        List<scenic> list = null;
+        try {
+            list = scenicservice.queryScenicByCity(city);
+            if (list != null) {
+                for (scenic scenic : list) {
+                    String[] picList = scenic.getSPic().split(";");
+                    scenic.setSPic(picList[0]);
+                }
+                modelMap.put("scenicList", list);
+                modelMap.put("success", true);
+            } else {
+                modelMap.put("success", false);
+                modelMap.put("errMsg", "暂时没有景区");
+            }
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        }
         return modelMap;
     }
 
@@ -54,7 +71,7 @@ public class scenicController {
         String scenicStr = request.getParameter("scenic");
         ObjectMapper mapper = new ObjectMapper();
         try {
-            scenic = mapper.readValue(scenicStr, com.niit.travel.entity.scenic.class);
+            scenic = mapper.readValue(scenicStr, scenic.class);
         } catch (IOException e) {
             modelMap.put("success", false);
             modelMap.put("errMsg", e.getMessage());
@@ -83,7 +100,7 @@ public class scenicController {
                     }
 
                 }
-                com.niit.travel.entity.scenic updateScenic = new scenic();
+                scenic updateScenic = new scenic();
                 updateScenic.setSId(scenicId);
                 if (scenicImagesAddr.equals("")) {
                     updateScenic.setSPic(null);
