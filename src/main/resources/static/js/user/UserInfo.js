@@ -22,10 +22,10 @@ $(function() {
             if (data.success) {
                 var userNameHtml = '<h1>' + data.user.uname + '</h1>';
                 var userIconHtml = '<img height="120px" width="120px" style="border-radius: 55px" src="http://localhost:8080/travel/images/' + data.user.uicon + '"/>';
-                var userInfoHtml = '<tr><td></td><td><input id="user-id" value="' + data.user.uid + '"style="display: none"/> </td></tr>' +
-                    '<tr><td>联系方式</td><td><input id="user-mobile" value=" ' + data.user.umobile + '"/></td></tr>' +
-                    '<tr><td>密码</td><td><input id="user-password" type="password" value="' + data.user.upwd + '"/></td></tr>' +
-                    '<tr><td>性别</td><td><select id="user-gender" name="gender"><option id="男" name="男" value="男">男</option><option id="女" name="女" value="女">女</option></select></td></tr>';
+                var userInfoHtml = '<table id="uInfo"><tr><td></td><td><input id="user-id" value="' + data.user.uid + '"style="display: none"/> </td></tr>' +
+                    '<tr><td>联系方式</td><td><input id="user-mobile" required="required" value=" ' + data.user.umobile + '"/></td></tr>' +
+                    '<tr><td>密码</td><td><input id="user-password" required="required" type="password" value="' + data.user.upwd + '"/></td></tr>' +
+                    '<tr><td>性别</td><td><select id="user-gender" required="required" name="gender"><option id="男" name="男" value="男">男</option><option id="女" name="女" value="女">女</option></select></td></tr></table>';
                 $('#user-name').html(userNameHtml);
                 $('#open_btn').html(userIconHtml);
                 $('#userInfotable').html(userInfoHtml);
@@ -181,10 +181,10 @@ $(function() {
             if (data.success) {
                 var html = '';
                 data.usercommentlist.map(function (item, index) {
-                    html += '<hr style="height:1px;border:none;border-top:1px solid #555555;" />' +
-                        '<a href="/travel/tn/totravelnote?travelnoteid=' + item.cotn_id + '" >' + item.cotn_id + '</a><br/>'
-                        + item.codetails + '</br><div>' + item.codate
-                        + '</div><a href="javascript:void(0);" data-id="'+item.coid+'">删除</a>';
+                    html += '<a class="brown" href="/travel/tn/totravelnote?travelnoteid=' +item.tn.tnid+ '" >' + item.tn.tn_Title+ '</a><div class="details">'
+                        + item.codetails + '</div><div class="time">' + item.codate
+                        + '</div><a class="del" href="javascript:void(0);" data-id="'+item.coid+'">删除</a>' +
+                        '<hr style="height:1px;border:none;border-top:1px solid #555555;" />';
                 });
                 $('#showcomment').html(html);
             }
@@ -227,7 +227,7 @@ $(function() {
             if (data.success) {
                 var html = '';
                 data.collectlist.map(function (item, index) {
-                    html += '<a href="/travel/tn/totravelnote?travelnoteid=' + item.tn.tnid + '" >' + item.tn.tn_Title + '</a><br/>' +
+                    html += '<a class="titl" href="/travel/tn/totravelnote?travelnoteid=' + item.tn.tnid + '" >' + item.tn.tn_Title + '</a><br/>' +
                         '<a href="/travel/tn/totravelnote?travelnoteid=' + item.tn.tnid + '" ><img src="http://localhost:8080/travel/images/'
                         + item.tn.tn_Pics + '"/></a></br><div id="time">'
                         + item.collect_Date
@@ -347,6 +347,7 @@ $(function() {
             $('#showcomment').attr("style","display:none");
             $('#scoreNote').attr("style","display:block");
         });
+
     }
 
 })

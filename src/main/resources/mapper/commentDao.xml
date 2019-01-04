@@ -9,31 +9,37 @@
         ORDER BY COId
         DESC
     </select>
-    <select id="queryCommentByUser" resultType="com.niit.travel.entity.comment">
-        SELECT  COId,COUser_id,CODate,COStatus,CODetails,COTN_id
-        FROM comment
-        WHERE
-          COUser_id=#{COUser_id}
-    </select>
-    <resultMap id="commentTousers" type="com.niit.travel.entity.comment">
+    <resultMap id="commentTotn" type="com.niit.travel.entity.comment">
         <id property="COId" column="COId"/>
         <result property="CODate" column="CODate"/>
         <result property="COStatus" column="COStatus"/>
         <result property="CODetails" column="CODetails"/>
-        <result property="COTN_id" column="COTN_id"/>
-        <result property="COUser_id" column="COUser_id"/>
+        <association property="tn" javaType="tn">
+            <id property="TNId" column="TNId"/>
+            <result property="TN_Title" column="TN_Title"/>
+            <result property="TN_Pics" column="TN_Pics"/>
+        </association>
         <association property="users" javaType="users">
             <id property="UId" column="UId"/>
             <result property="UName" column="UName"/>
             <result property="UIcon" column="UIcon"/>
         </association>
     </resultMap>
-    <select id="queryCommentByNote" resultMap="commentTousers">
+    <select id="queryCommentByUser" resultMap="commentTotn">
+        SELECT  c.COId,c.COUser_id,c.CODate,c.COStatus,c.CODetails,c.COTN_id,
+        t.TNId,t.TN_Title,t.TN_Pics
+        FROM comment c,tn t
+        <where>
+            c.COTN_id=t.TNId
+            and c.COUser_id=#{users.UId}
+        </where>
+    </select>
+    <select id="queryCommentByNote" resultMap="commentTotn">
         SELECT c.COId,c.CODate,c.COStatus,c.CODetails,c.COTN_id,u.UId,u.UName,u.UIcon
         FROM comment c,users u
         <where>
             and c.COUser_id=u.UId
-            and c.COTN_id=#{COTN_id}
+            and c.COTN_id=#{tn.TNId}
         </where>
     </select>
     <insert id="insertComment" useGeneratedKeys="true" keyProperty="COId"
@@ -41,7 +47,7 @@
         INSERT INTO
         comment(COUser_id,CODate,COStatus,CODetails,COTN_id)
         VALUES
-        (#{users.UId},#{CODate},#{COStatus},#{CODetails},#{COTN_id})
+        (#{users.UId},#{CODate},#{COStatus},#{CODetails},#{tn.TNId})
     </insert>
     <delete id="deleteComment">
         delete from

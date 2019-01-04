@@ -1,6 +1,7 @@
 package com.niit.travel.web;
 
 import com.niit.travel.entity.comment;
+import com.niit.travel.entity.tn;
 import com.niit.travel.entity.users;
 import com.niit.travel.service.commentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +50,12 @@ public class commentController{
             String details=request.getParameter("details");
             comment comment=new comment();
             users user=new users();
+            tn tn=new tn();
+            tn.setTNId(tnid);
             user.setUId(userid);
             comment.setCODate(date);
             comment.setCODetails(details);
-            comment.setCOTN_id(tnid);
+            comment.setTn(tn);
             comment.setUsers(user);
             comment.setCOStatus("Z");
             boolean flag=commentservice.insertComment(comment);

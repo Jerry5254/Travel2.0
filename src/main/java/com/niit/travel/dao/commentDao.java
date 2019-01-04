@@ -1,6 +1,8 @@
 package com.niit.travel.dao;
 
 import com.niit.travel.entity.comment;
+import com.niit.travel.entity.tn;
+import com.niit.travel.entity.users;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
