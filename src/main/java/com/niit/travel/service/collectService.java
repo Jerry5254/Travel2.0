@@ -10,4 +10,5 @@ public interface collectService {
     boolean insertCollect(collect collect);
     collect getCollectByTnAndUser(tn tn, Integer userid);
     boolean deleteCollect(Integer collectid);
+    collect getCollectBYId(Integer collectid);
 }

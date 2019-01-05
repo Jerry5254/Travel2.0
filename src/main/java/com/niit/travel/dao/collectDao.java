@@ -15,4 +15,5 @@ public interface collectDao {
     int insertCollect(collect collect);
     collect queryCollectByUserTn(@Param("tn") tn tn, @Param("Collect_Userid") Integer userid);
     int deleteCollect(Integer collectId);
+    collect queryCollectByid(Integer collectid);
 }

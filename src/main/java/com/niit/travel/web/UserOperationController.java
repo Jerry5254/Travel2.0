@@ -19,7 +19,6 @@ public class UserOperationController {
         return "RegisterUser";
     }
 
-
     @RequestMapping(value = "/tologin",method= RequestMethod.GET)
     public String Register(){
         return "login";
@@ -29,6 +28,7 @@ public class UserOperationController {
     public String showUser(){
         return "userinfo";
     }
+
 
 
 }

@@ -2,6 +2,8 @@ package com.niit.travel.service.Impl;
 
 import com.niit.travel.dao.commentDao;
 import com.niit.travel.entity.comment;
+import com.niit.travel.entity.tn;
+import com.niit.travel.entity.users;
 import com.niit.travel.service.commentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

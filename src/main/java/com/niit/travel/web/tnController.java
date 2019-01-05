@@ -48,10 +48,11 @@ public class tnController {
             travelnote.setTNCity(city);
             travelnote.setTN_Status("公开");//默认为公开
             travelnote.setTN_Date(date);
+            travelnote.setTNHit_Number(0);
             MultipartFile file=((MultipartHttpServletRequest)request).getFile("pic");
             try {
                 InputStream inputStream=file.getInputStream();
-                boolean flag=tnservice.addTravelNote(travelnote,inputStream,file.getOriginalFilename());
+                boolean flag=tnservice.addTravelNote(travelnote,file,file.getOriginalFilename());
                 if(flag){
                     modelMap.put("success",true);
                     modelMap.put("TravelNote",travelnote);
@@ -117,7 +118,8 @@ public class tnController {
     @RequestMapping(value="/getalltn",method = RequestMethod.GET)
     private Map<String,Object> getalltn(){
         Map<String,Object>modelMap=new HashMap<String,Object>();
-        List<tn> tnlist=tnservice.getAllTravelNote();
+        String status="公开";
+        List<tn> tnlist=tnservice.getAllTravelNote(status);
         if(tnlist!=null){
             modelMap.put("success",true);
             modelMap.put("tnlist",tnlist);
@@ -189,6 +191,11 @@ public class tnController {
             modelMap.put("errMsg","删除失败！");
         }
         return modelMap;
+    }
+
+    @RequestMapping(value = "/toalltravel",method= RequestMethod.GET)
+    public String toAllTravel(){
+        return "showAllTravelNotes";
     }
 
 }

@@ -26,7 +26,6 @@
                             <div id="history" style="display: none;">
                                 <h3>历史头像</h3>
                                 <div id="history-icon"></div>
-                                <div class="hist">123</div>
                             </div>
                             <div id="upload">
                                 <input type="file" id="user-alter-icon"/>
@@ -34,7 +33,6 @@
                         </div>
                         <h3 id="foot">
                             <div id="up-but"><button id="alter-icon">确定</button> </div>
-                            <div id="hi-but" style="display: none;"><button id="alter-icon-history">确定</button></div>
                         </h3>
                     </div>
                 </div>
@@ -107,19 +105,16 @@
         var up=document.getElementById('upload');
         var h=document.getElementById('history');
         var ubut=document.getElementById('up-but');
-        var hbut=document.getElementById('hi-but');
 
         his.onclick=function s(){
             up.style.display="none";
             h.style.display="block";
-            hbut.style.display="block";
             ubut.style.display="none";
         }
 
         upload.onclick=function q(){
             up.style.display="block";
             h.style.display="none";
-            hbut.style.display="none";
             ubut.style.display="block";
         }
 

@@ -42,4 +42,10 @@
         where
         Collect_Id=#{Collect_Id}
     </delete>
+    <select id="queryCollectByid" resultType="com.niit.travel.entity.collect">
+        SELECT Collect_Id,Collect_Noteid,Collect_Userid,Collect_Date
+        FROM collect
+        WHERE
+        Collect_Id=#{Collect_Id}
+    </select>
 </mapper>

@@ -164,8 +164,10 @@ $(function(){
                 //document.getElementById("collectImg").src="http://localhost:8080/travel/images/local/collect_qian.png";
                 var url='/travel/collect/deletecollect';
                 var collectid=$('#collect-id').val();
+                var tnid=$('#tnid').val();
                 var formdata=new FormData();
                 formdata.append('collectid',collectid);
+                formdata.append('tnid',tnid);
                 $.ajax({
                     url: url,
                     type: 'POST',
@@ -175,6 +177,7 @@ $(function(){
                     cache: false,
                     async: false,
                     success: function (data) {
+                        console.log(data.success);
                         if (data.success) {
                             setCollect();
                             alert("取消收藏成功！");

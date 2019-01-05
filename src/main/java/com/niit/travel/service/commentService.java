@@ -1,6 +1,8 @@
 package com.niit.travel.service;
 
 import com.niit.travel.entity.comment;
+import com.niit.travel.entity.tn;
+import com.niit.travel.entity.users;
 
 import java.util.List;
 

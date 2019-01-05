@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 @Mapper
 public interface tnDao {
-        List<tn> queryTravelNote();
+        List<tn> queryTravelNote(String status);//根据用户收藏人数排列
         List<tn> queryTravelNoteByCity(String TNCity);
         int insertTravelNote(tn TN);
         int updateTravelNote(tn TN);

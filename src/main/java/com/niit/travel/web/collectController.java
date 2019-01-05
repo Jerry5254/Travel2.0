@@ -3,6 +3,7 @@ package com.niit.travel.web;
 import com.niit.travel.entity.collect;
 import com.niit.travel.entity.tn;
 import com.niit.travel.service.collectService;
+import com.niit.travel.service.tnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,8 @@ import java.util.Map;
 public class collectController {
     @Autowired
     private collectService collectservice;
+    @Autowired
+    private tnService tnservice;
 
     @RequestMapping(value = "/showcollect",method = RequestMethod.GET)
     private Map<String, Object> showCollect(HttpSession session){
@@ -49,6 +52,11 @@ public class collectController {
             collect.setCollect_Date(date);
             boolean flag=collectservice.insertCollect(collect);
             if(flag){
+                tn tn2=tnservice.GettravelNoteById(tnid);
+                Integer number=tn2.getTNHit_Number()+1;
+                tn2.setTNHit_Number(number);
+                tnservice.updateTravelNote(tn2);
+                System.out.println("number="+tn2.getTNHit_Number()+" number2="+number);
                 modelMap.put("success",true);
             }else{
                 modelMap.put("success",false);
@@ -85,8 +93,15 @@ public class collectController {
         Map<String,Object>modelMap=new HashMap<String,Object>();
         String id=request.getParameter("collectid");
         Integer collectid=Integer.parseInt(id);
-        //System.out.println("coid"+collectid);
+        String tnid=request.getParameter("tnid");
+        Integer tnid2=Integer.parseInt(tnid);
+        tn tn=tnservice.GettravelNoteById(tnid2);
+        Integer number=tn.getTNHit_Number()-1;
+        tn.setTNHit_Number(number);
+        tnservice.updateTravelNote(tn);
+        System.out.println("number="+tn.getTNHit_Number()+" number2="+number);
         boolean flag=collectservice.deleteCollect(collectid);
+        System.out.println(flag);
         if(flag){
             modelMap.put("success",true);
         }else{

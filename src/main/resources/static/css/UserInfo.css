@@ -258,3 +258,14 @@ body{
 #manage-left a:hover{
     background-color: orange;
 }
+#upload-select:hover{
+    background-color: #0000cc;
+}
+#history-select:hover{
+    background-color: #0000cc;
+}
+.seleted-his{
+    padding:1px 1px 1px 1px;
+    border-style:groove;
+    border-color:green;
+}

@@ -9,6 +9,7 @@ import com.niit.travel.util.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 import java.util.List;
@@ -21,13 +22,13 @@ public class tnServiceImpl implements tnService {
 
     @Transactional
     @Override
-    public boolean addTravelNote(tn TN,InputStream inputStream,String fileName) {
+    public boolean addTravelNote(tn TN,MultipartFile file,String fileName) {
         if(TN.getTN_Title() !=null && !"".equals(TN.getTN_Title())){
             try{
                 int effectedNum=tndao.insertTravelNote(TN);
                 if(effectedNum>0){
-                    if(inputStream!=null){
-                        addTNPic(TN,inputStream,fileName);
+                    if(file!=null){
+                        addTNPic(TN,file,fileName);
                         effectedNum=tndao.updateTravelNote(TN);
                         if(effectedNum<=0){
                             throw new RuntimeException("更新图片失败！");
@@ -56,8 +57,8 @@ public class tnServiceImpl implements tnService {
     }
 
     @Override
-    public List<tn> getAllTravelNote() {
-        return tndao.queryTravelNote();
+    public List<tn> getAllTravelNote(String status) {
+        return tndao.queryTravelNote(status);
     }
 
     @Override
@@ -98,10 +99,10 @@ public class tnServiceImpl implements tnService {
     }
 
     //向数据库中插入封面
-    private void addTNPic(tn tn, InputStream inputStream, String fileName) {
+    private void addTNPic(tn tn, MultipartFile file, String fileName) {
         //获取图片的相对值路径
         String dest = PathUtil.getTnPicPath(tn.getTNId());
-        String tnPicAddr = ImageUtil.generateThumbnail(inputStream,fileName, dest);
+        String tnPicAddr = ImageUtil.addPicture(file,fileName,dest);
         tn.setTN_Pics(tnPicAddr);
 
     }

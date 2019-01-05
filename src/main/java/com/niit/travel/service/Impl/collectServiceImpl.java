@@ -49,4 +49,9 @@ public class collectServiceImpl implements collectService {
             throw new RuntimeException("删除信息失败！");
         }
     }
+
+    @Override
+    public collect getCollectBYId(Integer collectid) {
+        return collectdao.queryCollectByid(collectid);
+    }
 }

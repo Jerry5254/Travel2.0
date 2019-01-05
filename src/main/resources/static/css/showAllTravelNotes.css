@@ -1,0 +1,59 @@
+#all{
+    width: 95%;
+    margin: 0 auto;
+}
+#pic{
+    float:left;
+}
+#TravelNotes{
+    flex-direction: column;
+}
+#right{
+    height: 200px;
+    border-style: inset;
+    margin-left: 285px;
+    width: 350px;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+#tn{
+    display: inline-block;
+    width: 640px;
+    border-style: outset;
+    margin-top: 10px;
+    margin-right: 10px;
+    border-color: darkred;
+}
+#title{
+    text-decoration: none;
+    background-color: darkred;
+    color: white;
+    padding: 2px 2px 2px 2px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+#content{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-family: cursive;
+}
+#time{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-family: cursive;
+}
+#city{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-family: cursive;
+}
+#collect{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-family: cursive;
+}
