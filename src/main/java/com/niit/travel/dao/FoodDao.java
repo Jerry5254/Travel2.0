@@ -16,6 +16,8 @@ public interface FoodDao {
 
     Food getFoodById(int foodId);
 
+    Food getFoodByName(String foodName);
+
     List<Food> getFoodByCity(String cityName);
 
     int insertFood(Food food);

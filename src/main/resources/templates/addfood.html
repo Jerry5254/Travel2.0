@@ -10,12 +10,31 @@
 <body>
 <div>
     <h1>新增食物</h1>
-    <div id="add-food" class="control-group">
-        名称<input type="text" id="food-name" placeholder="食物名称"/><br/>
-        城市<input type="text" id="food-city" placeholder="食物所在城市"/><br/>
-        描述<input type="textarea" id="food-desc"/><br/>
-        图片<input type="file" id="food-img"/><br/>
-        <button id="submit">提交</button>
+
+    <div id="add-food">
+        <table>
+            <tr>
+                <td>美食名字</td>
+                <td><input type="text" id="food-name" placeholder="食物名称"/></td>
+            </tr>
+            <tr>
+                <td>美食所在城市</td>
+                <td>
+                    <select id="food-city">
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>请上传图片</td>
+                <td><input type="file" id="food-img"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="submit">提交</button>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
 

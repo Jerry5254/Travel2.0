@@ -1,0 +1,9 @@
+#city-nav {
+    width: 190px;
+}
+
+#city-nav li {
+    width: 60px;
+    float: left;
+    display: block;
+}

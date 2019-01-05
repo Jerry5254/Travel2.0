@@ -140,4 +140,9 @@ public class CityServiceImpl implements CityService {
         }
 
     }
+
+    @Override
+    public List<City> getCityInOrderByHn() {
+        return cityDao.getCityListInOrderByHN();
+    }
 }

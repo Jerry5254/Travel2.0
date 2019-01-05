@@ -26,4 +26,6 @@ public interface CityDao {
 
     List<City> getCityListInOrder(String property);
 
+    List<City> getCityListInOrderByHN();
+
 }

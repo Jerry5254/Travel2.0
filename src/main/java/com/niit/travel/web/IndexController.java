@@ -25,4 +25,14 @@ public class IndexController {
     public String city() {
         return "citytest";
     }
+
+    @RequestMapping(value = "/food")
+    public String showFood() {
+        return "showfood";
+    }
+
+    @RequestMapping(value = "/admin")
+    public String showAdmin() {
+        return "Admin";
+    }
 }

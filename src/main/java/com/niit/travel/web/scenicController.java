@@ -40,10 +40,27 @@ public class scenicController {
     }
 
     @RequestMapping(value = "/getscenicbycity", method = RequestMethod.GET)
-    private Map<String, Object> scn(String city) {
+    private Map<String, Object> scn(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        List<scenic> list = scenicservice.queryScenicByCity(city);
-        modelMap.put("sceniclist_city", list);
+        String city = request.getParameter("cityName");
+        List<scenic> list = null;
+        try {
+            list = scenicservice.queryScenicByCity(city);
+            if (list != null) {
+                for (scenic scenic : list) {
+                    String[] picList = scenic.getSPic().split(";");
+                    scenic.setSPic(picList[0]);
+                }
+                modelMap.put("scenicList", list);
+                modelMap.put("success", true);
+            } else {
+                modelMap.put("success", false);
+                modelMap.put("errMsg", "暂时没有景区");
+            }
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        }
         return modelMap;
     }
 
@@ -54,12 +71,13 @@ public class scenicController {
         String scenicStr = request.getParameter("scenic");
         ObjectMapper mapper = new ObjectMapper();
         try {
-            scenic = mapper.readValue(scenicStr, com.niit.travel.entity.scenic.class);
+            scenic = mapper.readValue(scenicStr, scenic.class);
         } catch (IOException e) {
             modelMap.put("success", false);
             modelMap.put("errMsg", e.getMessage());
         }
-        int imgAmount = Integer.parseInt(request.getParameter("imgAmount"));
+        int imgAmount = 0;
+        imgAmount = Integer.parseInt(request.getParameter("imgAmount"));
         if (scenic.getSName() != null && !scenic.getSName().equals("")) {
             if (scenicservice.getScenicByName(scenic.getSName()) != null) {
                 modelMap.put("success", false);
@@ -74,7 +92,7 @@ public class scenicController {
                     modelMap.put("errMsg", "景点ID出错啦");
                 }
                 String scenicImagesAddr = "";
-                if (scenicId > 0) {
+                if (scenicId > 0 && imgAmount > 0) {
                     for (int i = 0; i < imgAmount; i++) {
                         MultipartFile file = ((MultipartHttpServletRequest) request).getFile("scenicImg[" + i + "]");
                         String dest = PathUtil.getScenicImagePath(scenicId);
@@ -82,15 +100,13 @@ public class scenicController {
                         scenicImagesAddr += scenicImgAddr + ";";
                     }
 
-                }
-                com.niit.travel.entity.scenic updateScenic = new scenic();
-                updateScenic.setSId(scenicId);
-                if (scenicImagesAddr.equals("")) {
-                    updateScenic.setSPic(null);
-                } else {
+                    scenic updateScenic = new scenic();
+                    updateScenic.setSId(scenicId);
                     updateScenic.setSPic(scenicImagesAddr);
+                    modelMap.put("success", scenicservice.updateScenic(updateScenic));
+                } else {
+                    modelMap.put("success", true);
                 }
-                modelMap.put("success", scenicservice.updateScenic(updateScenic));
             }
         } else {
             modelMap.put("success", false);
@@ -204,6 +220,31 @@ public class scenicController {
         scenic.setSId(scenicId);
         scenic.setSPic(scenicImagesAddr);
         modelMap.put("success", scenicservice.updateScenic(scenic));
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/indexsceniclist", method = RequestMethod.GET)
+    public Map<String, Object> getIndexScenicList() {
+        Map<String, Object> modelMap = new HashMap<>();
+        try {
+            List<scenic> scenicList = scenicservice.queryScenic();
+            List<scenic> effecedList = new ArrayList<>();
+            int flag = 0;
+            for (scenic showScenic : scenicList) {
+                if (flag > 2) {
+                    break;
+                }
+                String[] pics = showScenic.getSPic().split(";");
+                showScenic.setSPic(pics[0]);
+                effecedList.add(showScenic);
+                flag++;
+            }
+            modelMap.put("scenicList", effecedList);
+            modelMap.put("success", true);
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        }
         return modelMap;
     }
 

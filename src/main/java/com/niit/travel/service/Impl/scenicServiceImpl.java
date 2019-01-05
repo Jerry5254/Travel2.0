@@ -28,7 +28,11 @@ public class scenicServiceImpl implements scenicService {
 
     @Override
     public List<scenic> queryScenicByCity(String SCity) {
-        return dao.queryScenicByCity(SCity);
+        List<scenic> scenicList = dao.queryScenicByCity(SCity);
+        if (scenicList.get(0) == null || scenicList.get(0).equals("")) {
+            return null;
+        }
+        return scenicList;
     }
 
     @Transactional

@@ -15,6 +15,12 @@
         where FId=#{foodId}
     </select>
 
+    <select id="getFoodByName" resultType="com.niit.travel.entity.Food">
+        select *
+        from food
+        where FName=#{foodName}
+    </select>
+
     <select id="getFoodByCity" resultType="com.niit.travel.entity.Food">
         select *
         from food
@@ -24,18 +30,17 @@
     <insert id="insertFood" parameterType="com.niit.travel.entity.Food" useGeneratedKeys="true" keyColumn="FId"
             keyProperty="FId">
         insert into
-        food(FName,FCity,FDes,FPic)
+        food(FName,FCity,FPic)
         values
-        (#{FName},#{FCity},#{FDes},#{FPic})
+        (#{FName},#{FCity},#{FPic})
     </insert>
 
     <update id="updateFood" parameterType="com.niit.travel.entity.Food">
         update food
         <set>
-            <if test="FCity != null">FCity=#{FCity}</if>
-            <if test="FDes != null">FDes=#{FDes}</if>
-            <if test="FName != null">FName=#{FName}</if>
-            <if test="FPic != null">FPic=#{FPic}</if>
+            <if test="FCity != null">FCity=#{FCity},</if>
+            <if test="FName != null">FName=#{FName},</if>
+            <if test="FPic != null">FPic=#{FPic},</if>
         </set>
         where FId=#{FId}
     </update>

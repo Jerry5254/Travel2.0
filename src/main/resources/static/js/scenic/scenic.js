@@ -4,12 +4,15 @@ $(function () {
 
 
     $('#add-scenic-btn').click(function () {
-        $('#add-scenic').css({"display": "block"});
+        if ($('#add-scenic').css("display") == "none") {
+            $('#add-scenic').css({"display": "block"});
+        } else {
+            $('#add-scenic').css({"display": "none"});
+        }
     });
     getCityForScenic(getPassCityListUrl);
     getScenicList(getScenicListUrl);
 
-    //填写景点时获取城市下拉框
     function getCityForScenic(url) {
         $.getJSON(url, function (data) {
             if (data.success) {
@@ -22,37 +25,68 @@ $(function () {
         });
     }
 
-    //提交景点
-    $('#submit-scenic').click(function () {
+    $supDialog = $('#J_addsuppliersDialog_scenic');
+    $supDialog.on('click', '.J_addOneSupplier', function (e) {
+        $supDialog.modal('shadeIn');
+
         var scenic = {};
         scenic.sname = $('#scenic-name').val();
         scenic.scity = $('#scenic-city').val();
         scenic.sdes = $('#scenic-desc').val();
-        var formData = new FormData();
-        formData.append("scenic", JSON.stringify(scenic));
+        var formData1 = new FormData();
+        formData1.append("scenic", JSON.stringify(scenic));
         var scenicImg = $('#scenic-img')[0].files;
         var imgAmount = scenicImg.length;
-        formData.append("imgAmount", imgAmount);
+        formData1.append("imgAmount", imgAmount.toString());
         for (var i = 0; i < imgAmount; i++) {
             var name = 'scenicImg[' + i + ']';
-            formData.append(name, scenicImg[i]);
+            formData1.append(name, scenicImg[i]);
         }
-        $.ajax({
-            url: '/travel/scenic/addscenic',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            processData: false,
-            cache: false,
-            success: function (data) {
-                if (data.success) {
-                    alert('提交成功！');
-                } else {
-                    alert('提交失败！' + data.errMsg);
-                }
+        return $.confirm({
+            title: '确认',
+            body: '您确认添加这个景点吗？',
+            backdrop: false,
+            okHide: function () {
+                $.ajax({
+                    url: '/travel/scenic/addscenic',
+                    type: 'post',
+                    data: formData1,
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    success: function (data) {
+                        if (data.success) {
+                            $.alert({
+                                hasfoot: false,
+                                backdrop: false,
+                                title: '系统提示',
+                                body: '<div style="height: 50px;color:darkred;margin: 0 auto;">您已提交</div>',
+                                timeout: 1000,
+                                width: 250,
+                                height: 100,
+                            });
+                        } else {
+                            $.alert({
+                                hasfoot: false,
+                                backdrop: false,
+                                title: '系统提示',
+                                body: '<div style="height: 50px;color:darkred;margin: 0 auto;">' + data.errMsg + '</div>',
+                                timeout: 1000,
+                                width: 250,
+                                height: 100,
+                            });
+                        }
+                        refreshCity();
+                    }
+                });
+            },
+            hide: function () {
+                return $supDialog.modal('shadeOut');
             }
         });
     });
+
+
 
     function getScenicList(url) {
         $.getJSON(url, function (data) {

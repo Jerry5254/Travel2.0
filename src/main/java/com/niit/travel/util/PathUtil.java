@@ -32,4 +32,10 @@ public class PathUtil {
         String imagePath="upload/item/scenic/"+scenicId+"/";
         return imagePath.replace("/", separator);
     }
+
+    public static String getFoodImagePath(int foodId) {
+        String imagePath = "upload/item/food/" + foodId + "/";
+        return imagePath.replace("/", separator);
+    }
+
 }
