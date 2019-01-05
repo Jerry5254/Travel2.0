@@ -5,7 +5,6 @@ $(function() {
     alterUserInfo();
     alterIcon();
     getHistoryIcon();
-    alterIconHistory();
     getTravelNote();
     getScore();
     getComment();
@@ -14,6 +13,7 @@ $(function() {
     deleteComment();
     deleteTn();
     active();
+    selectHistory();
 
     //获取用户信息
     function getUserInfo() {
@@ -40,33 +40,16 @@ $(function() {
             if (data.success) {
                 var historyIconHtml = '';
                 data.HistoryIconList.map(function (item, index) {
-                    historyIconHtml += '<div class="hist" id="' + item + '"> <img height="50px" width="50px" src="http://localhost:8080/travel/images/' + item + '"/></div>'
+                    historyIconHtml += '<a class="hi" data-id="' + item + '"> <img height="80px" width="80px" src="http://localhost:8080/travel/images/' + item + '"/></a>'
                 });
                 $('#history-icon').html(historyIconHtml);
             }
         });
     }
 
-    //提交历史头像
-    function alterIconHistory() {
-        var alterurl = '/travel/users/modifyuser';
-        $('#alter-icon-history').click(function () {
-            // $('.hist').click(function () {
-            //     //console.log()
-            //     var val = $(this).attr('id');
-            //     alert(val);
-            // });
-        });
-        console.log($('#history-icon .hist'))
-        $('.hist').click(function () {
-            alert('12');
-        });
-        console.log('123');
-    }
-
     //修改用户信息
     function alterUserInfo() {
-        var alterurl = '/travel/users/modifyuser'
+        var alterurl = '/travel/users/modifyuser';
         $('#submit').click(function () {
             var user = {};
             user.uid = $('#user-id').val();
@@ -137,7 +120,7 @@ $(function() {
                     $('#hasTn').attr("style","display:block")
                     var tnTableHtml = '';
                     var html = '</table>';
-                    var html2 = '<table width="700px" border="1" style=" margin-left:25px;"><tr class="head"><td>游记标题</td><td>提交日期</td><td>游记状态</td><td colspan="2">操作</td></tr>';
+                    var html2 = '<table width="700px" border="1" style=" margin-left:100px;"><tr class="head"><td>游记标题</td><td>提交日期</td><td>游记状态</td><td colspan="2">操作</td></tr>';
                     data.tnlist.map(function (item, index) {
                         tnTableHtml +=
                             '<tr style="height: 30px"><td><a href="/travel/tn/totravelnote?travelnoteid=' + item.tnid + '" >' + item.tn_Title + '</a></td>' +
@@ -191,18 +174,53 @@ $(function() {
         });
     }
 
+    //选择历史头像
+    function selectHistory(){
+        var alterurl = '/travel/users/modifyuser';
+        $('#history-icon').on('click','a',function(e){
+            $('.hi').removeClass("seleted-his")
+            $(this).addClass("seleted-his")
+            var img=$(this).attr("data-id");
+            var user = {};
+            user.uicon = img;
+            user.uid = $('#user-id').val();
+            var formData = new FormData();
+            formData.append('userInfo', JSON.stringify(user));
+            $.ajax({
+                url: alterurl,
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                cache: false,
+                success: function (data) {
+                    if (data.success) {
+                        getUserInfo();
+                        alert('修改成功');
+                    } else {
+                        alert('修改失败' + data.errMsg);
+                    }
+                }
+            });
+        });
+    }
+
     //删除用户收藏的游记
     function deletecollect() {
         var url = '/travel/collect/deletecollect';
         $('#showcollect').on('click','a',function(e){
           $('a').attr('disabled','true');
           var id=$(this).attr('data-id');
+          var tnid=$('#tniddd').val();
+          // var formdata=new FormData();
+          // formdata.append('collectid',id);
+          // formdata.append('tnid',tnid);
           var operation=$(this).text();
           if(operation=="删除"){
               $.ajax({
                   url: url,
                   type: 'POST',
-                  data: {collectid:id},
+                  data: {collectid:id,tnid:tnid},
                   cache: false,
                   async: false,
                   success: function (data) {
@@ -230,7 +248,7 @@ $(function() {
                     html += '<a class="titl" href="/travel/tn/totravelnote?travelnoteid=' + item.tn.tnid + '" >' + item.tn.tn_Title + '</a><br/>' +
                         '<a href="/travel/tn/totravelnote?travelnoteid=' + item.tn.tnid + '" ><img src="http://localhost:8080/travel/images/'
                         + item.tn.tn_Pics + '"/></a></br><div id="time">'
-                        + item.collect_Date
+                        + item.collect_Date+'<input type="text" style="display: none" id="tniddd" value="'+item.tn.tnid+'"/>'
                         + '</div><a class="delete" href="javascript:void(0);" data-id="'+item.collect_Id+'">删除</a>' +
                         '<hr style="height:1px;border:none;border-top:1px solid #555555;" />';
                 });
