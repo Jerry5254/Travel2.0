@@ -1,0 +1,45 @@
+#main-content {
+    width: 520px;
+    height: 420px;
+    margin-bottom: 30px;
+    margin-top: 110px;
+}
+
+#register-user {
+    width: 250px;
+    height: 420px;
+    float: right;
+    border: 1px solid grey;
+    display: block;
+}
+
+#pic {
+    float: left;
+    width: 250px;
+    height: 420px;
+    float: left;
+    display: block;
+    border: 1px solid black;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+#register-table {
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+#register-table div {
+    margin-bottom: 10px;
+}
+
+#register-button {
+    margin-top: 30px;
+}
+
+button {
+    margin-right: 30px;
+}
