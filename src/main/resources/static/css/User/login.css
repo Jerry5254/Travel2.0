@@ -1,0 +1,53 @@
+#login-table {
+    margin-top: 50px;
+}
+
+#footer {
+    paading: 0;
+    margin: 0;
+}
+
+#login-table {
+    position: absolute;
+    top: 15%;
+    right: 12%;
+    border: 2px solid white;
+    box-shadow: 3px 3px 5px black;
+    border-radius: 10px;
+    width: 350px;
+    height: 315px;
+}
+
+input {
+    outline: none;
+    border: 0;
+    height: 30px;
+    background: transparent;
+    border: thin solid;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px black;
+    -webkit-appearance: none;
+}
+
+table {
+    margin-top: 35px;
+    margin-left: 28px;
+    height: 300px;
+    font-size: 18px;
+    font-family: "微软雅黑 Light";
+    color: white;
+    text-shadow: 2px 2px 4px black;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    border: 2px solid white;
+    outline: none;
+}
+
+#submit {
+    width: 120px;
+    height: 30px;
+    background: transparent;
+}

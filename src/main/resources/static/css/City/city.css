@@ -1,13 +1,3 @@
-#city-nav {
-    width: 190px;
-}
-
-#city-nav li {
-    width: 60px;
-    float: left;
-    display: block;
-}
-
 #city-intro-word {
     color: #FFA54F;
     font-size: 35px;
