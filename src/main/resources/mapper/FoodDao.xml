@@ -38,9 +38,9 @@
     <update id="updateFood" parameterType="com.niit.travel.entity.Food">
         update food
         <set>
-            <if test="FCity != null">FCity=#{FCity}</if>
-            <if test="FName != null">FName=#{FName}</if>
-            <if test="FPic != null">FPic=#{FPic}</if>
+            <if test="FCity != null">FCity=#{FCity},</if>
+            <if test="FName != null">FName=#{FName},</if>
+            <if test="FPic != null">FPic=#{FPic},</if>
         </set>
         where FId=#{FId}
     </update>

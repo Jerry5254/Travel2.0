@@ -153,7 +153,7 @@ public class CityController {
     }
 
     @RequestMapping(value = "/addcity", method = RequestMethod.POST)
-    public Map<String, Object> insertCity(HttpServletRequest request) {
+    public Map<String, Object> addCity(HttpServletRequest request) {
         City city = null;
         Map<String, Object> modelMap = new HashMap<>();
 
@@ -171,6 +171,51 @@ public class CityController {
             modelMap.put("errMsg", "已经存在该城市了");
         } else {
             modelMap.put("success", cityService.addCity(city));
+        }
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/addcitybyadmin", method = RequestMethod.POST)
+    public Map<String, Object> insertCity(HttpServletRequest request) {
+        City city = null;
+        Map<String, Object> modelMap = new HashMap<>();
+
+        String newCityInfo = request.getParameter("newCityInfo");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            city = mapper.readValue(newCityInfo, City.class);
+        } catch (IOException e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        }
+
+        if (cityService.getCityByName(city.getCName()) != null) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "已经存在该城市了");
+        } else {
+            boolean result = cityService.addCity(city);
+            int imgAmount = Integer.parseInt(request.getParameter("imgAmount"));
+            if (result) {
+                int cityId = cityService.getCityByName(city.getCName()).getCId();
+                String cityImagesAddr = "";
+                for (int i = 0; i < imgAmount; i++) {
+                    MultipartFile file = ((MultipartHttpServletRequest) request).getFile("cityImg[" + i + "]");
+                    String dest = PathUtil.getCityImagePath(cityId);
+                    String cityImgAddr = ImageUtil.addPicture(file, file.getOriginalFilename(), dest);
+                    cityImagesAddr += cityImgAddr + ";";
+                }
+
+                City updataCity = new City();
+                updataCity.setCId(cityId);
+                updataCity.setCStatus("Y");
+                if (cityImagesAddr.equals("")) {
+                    updataCity.setCPic(null);
+                } else {
+
+                    updataCity.setCPic(cityImagesAddr);
+                }
+                modelMap.put("success", cityService.modifyCity(updataCity));
+            }
         }
         return modelMap;
     }

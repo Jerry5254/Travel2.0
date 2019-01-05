@@ -30,4 +30,9 @@ public class IndexController {
     public String showFood() {
         return "showfood";
     }
+
+    @RequestMapping(value = "/admin")
+    public String showAdmin() {
+        return "Admin";
+    }
 }

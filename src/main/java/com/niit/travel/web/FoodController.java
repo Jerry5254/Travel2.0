@@ -154,4 +154,19 @@ public class FoodController {
         return modelMap;
     }
 
+    @RequestMapping(value = "/modifyfood", method = RequestMethod.POST)
+    private Map<String, Object> modifyfood(HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<>();
+        Food food = new Food();
+        int foodId = Integer.parseInt(request.getParameter("foodId"));
+        String foodName = request.getParameter("foodName");
+        String foodCity = request.getParameter("foodCity");
+        food.setFId(foodId);
+        food.setFName(foodName);
+        food.setFCity(foodCity);
+
+        modelMap.put("success", foodService.modifyFood(food));
+        return modelMap;
+    }
+
 }

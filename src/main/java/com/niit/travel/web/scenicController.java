@@ -76,7 +76,8 @@ public class scenicController {
             modelMap.put("success", false);
             modelMap.put("errMsg", e.getMessage());
         }
-        int imgAmount = Integer.parseInt(request.getParameter("imgAmount"));
+        int imgAmount = 0;
+        imgAmount = Integer.parseInt(request.getParameter("imgAmount"));
         if (scenic.getSName() != null && !scenic.getSName().equals("")) {
             if (scenicservice.getScenicByName(scenic.getSName()) != null) {
                 modelMap.put("success", false);
@@ -91,7 +92,7 @@ public class scenicController {
                     modelMap.put("errMsg", "景点ID出错啦");
                 }
                 String scenicImagesAddr = "";
-                if (scenicId > 0) {
+                if (scenicId > 0 && imgAmount > 0) {
                     for (int i = 0; i < imgAmount; i++) {
                         MultipartFile file = ((MultipartHttpServletRequest) request).getFile("scenicImg[" + i + "]");
                         String dest = PathUtil.getScenicImagePath(scenicId);
@@ -99,15 +100,13 @@ public class scenicController {
                         scenicImagesAddr += scenicImgAddr + ";";
                     }
 
-                }
-                scenic updateScenic = new scenic();
-                updateScenic.setSId(scenicId);
-                if (scenicImagesAddr.equals("")) {
-                    updateScenic.setSPic(null);
-                } else {
+                    scenic updateScenic = new scenic();
+                    updateScenic.setSId(scenicId);
                     updateScenic.setSPic(scenicImagesAddr);
+                    modelMap.put("success", scenicservice.updateScenic(updateScenic));
+                } else {
+                    modelMap.put("success", true);
                 }
-                modelMap.put("success", scenicservice.updateScenic(updateScenic));
             }
         } else {
             modelMap.put("success", false);

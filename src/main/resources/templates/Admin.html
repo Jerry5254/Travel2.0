@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员空间</title>
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui-append.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
+    <script type="text/javascript" src="js/scenic/scenic.js"></script>
+    <script type="text/javascript" src="js/food/food.js"></script>
+    <link href="css/admin.css" rel="stylesheet">
+    <script type="text/javascript" src="js/nav.js"></script>
+    <link href="css/nav.css" rel="stylesheet">
+    <script type="text/javascript" src="js/admin.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<div class="sui-navbar navbar-fixed-top">
+    <div class="navbar-inner"><a href="http://localhost:8080/travel" class="sui-brand">NIIT</a>
+        <ul class="sui-nav">
+            <li class="active"><a href="http://localhost:8080/travel">首页</a></li>
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">城市<i
+                    class="caret"></i></a>
+
+                <ul role="menu" class="sui-dropdown-menu" id="city-nav">
+                </ul>
+            </li>
+            <li><a href="#">游记</a></li>
+            <li><a href="http://localhost:8080/travel/food">美食</a></li>
+        </ul>
+    </div>
+</div>
+<div>
+    <div id="left-space">
+        <h2 id="title">管理员空间</h2>
+        <ul>
+            <li style="color:#EEDC82" id="city-button">管理城市</li>
+            <li id="scenic-button">管理景点</li>
+            <li id="food-button">管理美食</li>
+            <li id="tn-button">管理游记</li>
+        </ul>
+    </div>
+    <div id="right-space">
+        <div id="tn" style="display: none"></div>
+        <div id="food" style="display: none">
+            <button id="J_addsuppliers_food" data-toggle="modal" data-target="#J_addsuppliersDialog_food"
+                    data-width="primary"
+                    data-backdrop="static" class="sui-btn btn-primary">添加新美食
+            </button>
+            <div id="J_addsuppliersDialog_food" tabindex="-1" role="dialog" class="sui-modal hide fade"
+                 data-addsupplierurl="http://"
+                 data-getsuppliersurl="http://xxx">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×
+                            </button>
+                            <h4 id="myModalLabel2" class="modal-title">添加美食</h4>
+                        </div>
+                        <div class="modal-body sui-form form-horizontal">
+                            <div class="control-group">
+                                <div class="controls">
+                                    美食名字：<input type="text" id="food-name" placeholder="食物名称"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    美食所在城市：<select id="food-city">
+
+                                </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    上传美食图片：<input type="file" id="food-img"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-ok="modal"
+                                    class="sui-btn btn-primary btn-large J_addOneSupplier">添加
+                            </button>
+                            <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="food-list">
+                <table class="sui-table table-primary">
+                    <thead>
+                    <tr>
+                        <th>美食ID</th>
+                        <th>美食名字</th>
+                        <th>美食所在城市</th>
+                        <th></th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="show-foodlist">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+        <div id="scenic" style="display: none">
+            <button id="J_addsuppliers_scenic" data-toggle="modal" data-target="#J_addsuppliersDialog_scenic"
+                    data-width="primary"
+                    data-backdrop="static" class="sui-btn btn-primary">添加新景点
+            </button>
+            <div id="J_addsuppliersDialog_scenic" tabindex="-1" role="dialog" class="sui-modal hide fade"
+                 data-addsupplierurl="http://"
+                 data-getsuppliersurl="http://xxx">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×
+                            </button>
+                            <h4 id="myModalLabel1" class="modal-title">添加新景点</h4>
+                        </div>
+                        <div class="modal-body sui-form form-horizontal">
+                            <div class="control-group">
+                                <div class="controls">
+                                    景点名字：<input type="text" placeholder="请输入景点名字" id="scenic-name"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    景点所在城市：<select id="scenic-city">
+
+                                </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    景点描述：<textarea id="scenic-desc"></textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    上传景点图片：<input type="file" multiple="multiple" id="scenic-img"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-ok="modal"
+                                    class="sui-btn btn-primary btn-large J_addOneSupplier">添加
+                            </button>
+                            <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="scenic-list">
+                <table class="sui-table table-primary">
+                    <thead>
+                    <tr>
+                        <th>景点ID</th>
+                        <th>景点名字</th>
+                        <th>景点所在城市</th>
+                        <th>景点描述</th>
+                        <th></th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="show-sceniclist">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="city">
+
+            <div id="modify-city">
+    <span class="sui-dropdown dropdown-bordered">
+        <span class="dropdown-inner"><a role="button" id="cityshow-type" data-toggle="dropdown" href="#"
+                                        class="dropdown-toggle"><i
+                class="caret"></i><span>所有城市</span></a>
+    <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);"
+                                 id="show-all-city">所有城市</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);"
+                                 id="show-n-city">审核中城市</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);"
+                                   id="show-pass-city">已通过城市</a></li>
+    </ul>
+        </span>
+    </span>
+                <button id="J_addsuppliers" data-toggle="modal" data-target="#J_addsuppliersDialog" data-width="primary"
+                        data-backdrop="static" class="sui-btn btn-primary">添加新城市
+                </button>
+                <div id="J_addsuppliersDialog" tabindex="-1" role="dialog" class="sui-modal hide fade"
+                     data-addsupplierurl="http://"
+                     data-getsuppliersurl="http://xxx">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×
+                                </button>
+                                <h4 id="myModalLabel" class="modal-title">添加新城市</h4>
+                            </div>
+                            <div class="modal-body sui-form form-horizontal">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        城市名字：<input type="text" id="new-city-name" placeholder="请输入城市名字">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        城市描述：<textarea id="new-city-desc" placeholder="请描述一下城市"></textarea>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        上传城市图片：<input type="file" id="new-city-pic" multiple="multiple"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" data-ok="modal"
+                                        class="sui-btn btn-primary btn-large J_addOneSupplier">添加
+                                </button>
+                                <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="city-list">
+                    <table class="sui-table table-primary">
+                        <thead>
+                        <tr>
+                            <th>城市ID</th>
+                            <th>城市名字</th>
+                            <th>城市状态</th>
+                            <th>城市描述</th>
+                            <th>用户点击量</th>
+                            <th></th>
+
+                        </tr>
+                        </thead>
+                        <tbody id="show-citylist">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="new-city">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
