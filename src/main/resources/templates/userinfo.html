@@ -4,14 +4,38 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link th:href="@{/css/UserInfo.css}" rel="stylesheet">
+    <link th:href="@{/css/nav.css}" rel="stylesheet">
+    <!--<link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">-->
+    <!--<link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui-append.min.css" rel="stylesheet">-->
+    <script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
 </head>
 <body>
+<!--<div class="sui-navbar navbar-fixed-top">-->
+    <!--<div class="navbar-inner"><a href="http://localhost:8080/travel" class="sui-brand">NIIT</a>-->
+        <!--<ul class="sui-nav">-->
+            <!--<li class="active"><a href="http://localhost:8080/travel">首页</a></li>-->
+            <!--<li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">城市<i-->
+                    <!--class="caret"></i></a>-->
+
+                <!--<ul role="menu" class="sui-dropdown-menu" id="city-nav">-->
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li><a href="#">游记</a></li>-->
+            <!--<li><a href="http://localhost:8080/travel/food">美食</a></li>-->
+        <!--</ul>-->
+        <!--<ul class="sui-nav pull-right">-->
+            <!--<li><a href="http://localhost:8080/travel/users/tologin">登录</a></li>-->
+            <!--<li><a href="http://localhost:8080/travel/users/registeruser">注册</a></li>-->
+        <!--</ul>-->
+    <!--</div>-->
+<!--</div>-->
 <div id="all">
-    <div id="top-panel">
+    <div id="top-panell">
         <div id="user-icon">
             <span id="open_btn"></span>
             <div id="altericon">
-                <div id="background" class="back">
+                <div id="backgroundd" class="back">
                     <div id="div1" class="content">
                         <div id="close">
                             <span id="close-button">×</span>
@@ -91,10 +115,19 @@
         </div>
     </div>
 </div>
-
+<!--<div class="sui-footer">-->
+    <!--<hr/>-->
+    <!--<div class="sui-container" style="width:110px">-->
+        <!--<h5 id="about_us" style="display: inline;cursor: pointer">关于我们</h5>-->
+        <!--<h5 id="contact_us" style="display: inline;cursor: pointer">联系我们</h5>-->
+    <!--</div>-->
+    <!--<h5 style="text-align: center">© NIIT Travel, Inc.</h5>-->
+    <!--<hr/>-->
+<!--</div>-->
 </body>
 <script type="text/javascript" th:src="@{/jquery-1.10.0.js}"></script>
 <script type="text/javascript" th:src="@{/js/user/UserInfo.js}"></script>
+<script type="text/javascript" th:src="@{/js/nav.js}"></script>
 <!--修改头像弹窗-->
 <script>
         var btn = document.getElementById('open_btn');

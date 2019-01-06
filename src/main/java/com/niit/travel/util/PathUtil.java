@@ -37,5 +37,4 @@ public class PathUtil {
         String imagePath = "upload/item/food/" + foodId + "/";
         return imagePath.replace("/", separator);
     }
-
 }

@@ -8,28 +8,25 @@ import org.springframework.context.annotation.Configuration;
 
 import java.beans.PropertyVetoException;
 
-
 @Configuration
-@MapperScan("com.niit.travel.dao")
+@MapperScan("com.travel.travel.dao")
 public class DataSourceConfiguration {
-
     @Value("${jdbc.driver}")
     private String jdbcDriver;
     @Value("${jdbc.url}")
     private String jdbcUrl;
     @Value("${jdbc.username}")
-    private String jdbcUserName;
+    private String jdbcUsername;
     @Value("${jdbc.password}")
     private String jdbcPassword;
 
-    @Bean(name = "dataSource")
+    @Bean(name="dataSource")
     public ComboPooledDataSource createDataSource() throws PropertyVetoException {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
         dataSource.setDriverClass(jdbcDriver);
         dataSource.setJdbcUrl(jdbcUrl);
-        dataSource.setUser(jdbcUserName);
+        dataSource.setUser(jdbcUsername);
         dataSource.setPassword(jdbcPassword);
-
         dataSource.setAutoCommitOnClose(false);
         return dataSource;
     }

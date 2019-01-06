@@ -98,6 +98,11 @@ public class tnServiceImpl implements tnService {
         }
     }
 
+    @Override
+    public List<tn> getTravelNoteByCity(String tncity) {
+        return tndao.queryTravelNoteByCity(tncity);
+    }
+
     //向数据库中插入封面
     private void addTNPic(tn tn, MultipartFile file, String fileName) {
         //获取图片的相对值路径

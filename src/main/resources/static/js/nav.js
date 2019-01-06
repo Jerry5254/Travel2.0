@@ -1,7 +1,10 @@
 $(function () {
     var getCityUrl = '/travel/city/citylist';
+    var loginurl='/travel/users/islogin';
+    var logouturl='/travel/users/logout'
 
     getCityList();
+    isLogin();
 
     $('#about_us').click(function () {
         $.alert({
@@ -22,6 +25,40 @@ $(function () {
             width: 250,
             height: 100,
         });
+    });
+
+    function isLogin(){
+        $.getJSON(loginurl, function (data) {
+            if (data.success) {
+                var status=data.status;
+                if(status==1){
+                    var html='<li><a href="http://localhost:8080/travel/admin">欢迎管理员！'+data.users.uname+'</a></li>'+
+                    '<li><a id="logout" href="javascript:void(0);t">退出登录</a></li>';
+                    $('#islogin').html(html);
+                }else if(status==2){
+                    var html='<li><a href="http://localhost:8080/travel/users/touserinfo">欢迎您!'+data.users.uname+'</a></li>'+
+                        '<li><a id="logout" href="javascript:void(0);">退出登录</a></li>';
+                    $('#islogin').html(html);
+                }else{
+                    var html='<li><a href="http://localhost:8080/travel/users/tologin">登录</a></li>'+
+                    '<li><a href="http://localhost:8080/travel/users/registeruser">注册</a></li>';
+                    $('#islogin').html(html);
+                }
+            }
+        });
+    }
+
+    $('#islogin').on('click', 'li a', function () {
+        var text=$(this).text();
+        if(text=='退出登录'){
+            $.getJSON(logouturl, function (data) {
+                console.log(data.success);
+                if (data.success) {
+                    alert('退出登录成功！');
+                    isLogin();
+                }
+            });
+        }
     });
 
 

@@ -20,7 +20,7 @@ $(function(){
                     console.log(data.success);
                     if (data.success) {
                         alert('登陆成功');
-                        window.location.href='/travel/users/touserinfo';
+                        window.location.href='/travel';
                     } else {
                         alert('登陆失败：'+data.errMsg);
                     }

@@ -14,4 +14,5 @@ public interface tnService {
     List<tn> getShowTravelNote(String status);
     boolean updateTravelNote(tn Tn);
     boolean deleteTravelNote(Integer id);
+    List<tn> getTravelNoteByCity(String tncity);
 }

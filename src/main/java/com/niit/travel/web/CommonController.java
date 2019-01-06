@@ -1,7 +1,6 @@
 package com.niit.travel.web;
 
 import com.baidu.ueditor.ActionEnter;
-import org.json.JSONException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,8 +31,6 @@ public class CommonController {
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
             e.printStackTrace();
         }
     }

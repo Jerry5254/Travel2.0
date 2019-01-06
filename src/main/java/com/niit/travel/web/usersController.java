@@ -150,6 +150,38 @@ public class usersController {
         return modelMap;
     }
 
+    //判断导航栏
+    @RequestMapping(value = "/islogin",method = RequestMethod.GET)
+    private Map<String,Object> daohang(HttpSession session){
+        Map<String,Object>modelMap=new HashMap<String,Object>();
+        Integer id= (Integer) session.getAttribute("id");
+        if(id!=null){
+            users user=userservice.queryUsersById(id);
+            if(id==1){
+                modelMap.put("success",true);
+                modelMap.put("users",user);
+                modelMap.put("status",1);//登录人为管理员
+            }else{
+                modelMap.put("success",true);
+                modelMap.put("users",user);
+                modelMap.put("status",2);//登录人为用户
+            }
+        }else{
+            modelMap.put("success",true);
+            modelMap.put("status",3);//未登录
+        }
+        return modelMap;
+    }
+
+    //退出登录
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    private Map<String, Object> logout(HttpSession session){
+        Map<String,Object>modelMap=new HashMap<String,Object>();
+        session.removeAttribute("id");
+        modelMap.put("success",true);
+        return modelMap;
+    }
+
     //修改用户头像
     @RequestMapping(value = "/altericon",method = RequestMethod.POST)
     private Map<String, Object> AlterIcon(HttpServletRequest request){

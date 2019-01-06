@@ -3,8 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Test</title>
+    <link th:href="@{/css/nav.css}" rel="stylesheet">
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui-append.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
 </head>
 <body>
+<div class="sui-navbar navbar-fixed-top">
+    <div class="navbar-inner"><a href="http://localhost:8080/travel" class="sui-brand">NIIT</a>
+        <ul class="sui-nav">
+            <li class="active"><a href="http://localhost:8080/travel">首页</a></li>
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">城市<i
+                    class="caret"></i></a>
+
+                <ul role="menu" class="sui-dropdown-menu" id="city-nav">
+                </ul>
+            </li>
+            <li><a href="http://localhost:8080/travel/tn/toalltravel">游记</a></li>
+            <li><a href="http://localhost:8080/travel/food">美食</a></li>
+        </ul>
+        <ul id="islogin" class="sui-nav pull-right">
+            <!--<li><a href="http://localhost:8080/travel/users/tologin">登录</a></li>-->
+            <!--<li><a href="http://localhost:8080/travel/users/registeruser">注册</a></li>-->
+        </ul>
+    </div>
+</div>
+<div id="editor" style="margin-top: 60px;">
 <h5>标题：<input type="text" id="title"/></h5>
 <div id="city">
     城市：
@@ -33,6 +58,7 @@
 <button id="submit">提交</button>
 <script type="text/javascript" th:src="@{jquery-1.10.0.js}"></script>
 <script type="text/javascript" th:src="@{/js/travelnote/addTravelNote.js}"></script>
-
+<script type="text/javascript" th:src="@{/js/nav.js}"></script>
+</div>
 </body>
 </html>

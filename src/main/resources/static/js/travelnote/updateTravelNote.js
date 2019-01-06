@@ -53,6 +53,7 @@ $(function(){
                 success: function (data) {
                     if (data.success) {
                         alert('修改成功');
+                        window.location.href='http://localhost:8080/travel/users/touserinfo';
                     } else {
                         alert('修改失败：'+data.errMsg);
                     }

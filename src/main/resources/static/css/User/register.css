@@ -1,12 +1,12 @@
 #main-content {
-    width: 520px;
+    width: 610px;
     height: 450px;
     margin-bottom: 30px;
     margin-top: 110px;
 }
 
 #register-user {
-    width: 250px;
+    width: 290px;
     height: 450px;
     float: right;
     border: 1px solid grey;
@@ -15,7 +15,7 @@
 
 #pic {
     float: left;
-    width: 250px;
+    width: 290px;
     height: 450px;
     float: left;
     display: block;

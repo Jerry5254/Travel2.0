@@ -1,6 +1,7 @@
 #all{
-    width: 95%;
+    width: 75%;
     margin: 0 auto;
+    margin-top: 50px;
 }
 #pic{
     float:left;
@@ -35,25 +36,25 @@
 }
 #content{
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 18px;
     font-family: cursive;
 }
 #time{
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 18px;
     font-family: cursive;
 }
 #city{
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 18px;
     font-family: cursive;
 }
 #collect{
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 18px;
     font-family: cursive;
 }

@@ -47,7 +47,7 @@ public class scenicController {
         try {
             list = scenicservice.queryScenicByCity(city);
             if (list != null) {
-                for (scenic scenic : list) {
+                for (com.niit.travel.entity.scenic scenic : list) {
                     String[] picList = scenic.getSPic().split(";");
                     scenic.setSPic(picList[0]);
                 }
@@ -71,7 +71,7 @@ public class scenicController {
         String scenicStr = request.getParameter("scenic");
         ObjectMapper mapper = new ObjectMapper();
         try {
-            scenic = mapper.readValue(scenicStr, scenic.class);
+            scenic = mapper.readValue(scenicStr, com.niit.travel.entity.scenic.class);
         } catch (IOException e) {
             modelMap.put("success", false);
             modelMap.put("errMsg", e.getMessage());
@@ -100,7 +100,7 @@ public class scenicController {
                         scenicImagesAddr += scenicImgAddr + ";";
                     }
 
-                    scenic updateScenic = new scenic();
+                    com.niit.travel.entity.scenic updateScenic = new scenic();
                     updateScenic.setSId(scenicId);
                     updateScenic.setSPic(scenicImagesAddr);
                     modelMap.put("success", scenicservice.updateScenic(updateScenic));

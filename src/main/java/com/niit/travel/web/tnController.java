@@ -15,10 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/tn")
@@ -130,6 +127,34 @@ public class tnController {
         return modelMap;
     }
 
+    //获取前六个游记
+    @ResponseBody
+    @RequestMapping(value="/gettnsix",method = RequestMethod.GET)
+    private Map<String,Object> getatnsix(){
+        Map<String,Object>modelMap=new HashMap<String,Object>();
+        String status="公开";
+        List<tn> tnlist=tnservice.getAllTravelNote(status);
+        List<tn> six=new ArrayList<>();
+        int flag = 0;
+        for (tn tn : tnlist) {
+            if (flag > 5) {
+                break;
+            }
+            if(tn.getTN_Status().equals(status)){
+                six.add(tn);
+            }
+            flag++;
+        }
+        if(six!=null){
+            modelMap.put("success",true);
+            modelMap.put("tnlistsix",six);
+        }else{
+            modelMap.put("success",false);
+            modelMap.put("errMsg","获取失败！");
+        }
+        return modelMap;
+    }
+
     //获取状态为“公开”的游记
     @ResponseBody
     @RequestMapping(value="/getshowtn",method = RequestMethod.GET)
@@ -196,6 +221,18 @@ public class tnController {
     @RequestMapping(value = "/toalltravel",method= RequestMethod.GET)
     public String toAllTravel(){
         return "showAllTravelNotes";
+    }
+
+    //获取该城市的游记
+    @ResponseBody
+    @RequestMapping(value="/gettravelnotebycity",method=RequestMethod.GET)
+    private Map<String,Object> tncity(HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        String city=request.getParameter("cityname");
+        List<tn> tnlist=tnservice.getTravelNoteByCity(city);
+        modelMap.put("success",true);
+        modelMap.put("tncitylist",tnlist);
+        return modelMap;
     }
 
 }

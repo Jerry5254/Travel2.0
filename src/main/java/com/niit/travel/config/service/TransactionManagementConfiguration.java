@@ -1,6 +1,3 @@
-/*
-作者:林夏媚
-*/
 package com.niit.travel.config.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +15,6 @@ public class TransactionManagementConfiguration implements TransactionManagement
 
     @Autowired
     private DataSource dataSource;
-
     @Override
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         return new DataSourceTransactionManager(dataSource);

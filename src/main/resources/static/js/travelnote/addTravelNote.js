@@ -43,6 +43,7 @@ $(function(){
                     console.log(data.success);
                     if (data.success) {
                         alert('添加成功');
+                        window.location.href='http://localhost:8080/travel/users/touserinfo';
                     } else {
                         alert('添加失败：'+data.errMsg);
                     }

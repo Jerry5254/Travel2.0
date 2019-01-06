@@ -4,6 +4,7 @@ $(function () {
     getIndexHotCity();
     getFood("广州");
     getIndexScenic();
+    getTn();
 
     $('#QD').click(function () {
         $('#city-food button').css({"background-color": " white", "color": "black"});
@@ -103,6 +104,32 @@ $(function () {
             data: {"cityId": id}
         });
         $(location).attr('href', '/travel/city/getcity?cityId=' + id);
+        e.stopPropagation();
+    });
+
+    function getTn() {
+        $.ajax({
+            type: 'get',
+            url: '/travel/tn/gettnsix',
+            success: function (data) {
+                if (data.success) {
+                    var cityHtml = '';
+                    data.tnlistsix.map(function (item, index) {
+                        cityHtml += '<div style="width: 210px;margin-right: 45px;display:block;float:left">\n' +
+                            '                <img data-id="' + item.tnid + '" src="http://localhost:8080/travel/images/' + item.tn_Pics + '" style="cursor:pointer;width: 220px;height:140px;border-radius: 5px"/>\n' +
+                            '                <p data-id="' + item.tnid + '" style="font-family: \'微软雅黑 Light\';font-size: 18px;text-align: center;cursor: pointer">' + item.tn_Title + '</p>\n' +
+                            '            </div>';
+
+                    });
+                    $('#show-tn').html(cityHtml);
+                }
+            }
+        });
+    }
+
+    $('#show-tn').on('click', 'img,p', function () {
+        var id = $(this).data('id');
+        $(location).attr('href', '/travel/tn/totravelnote?travelnoteid=' + id);
         e.stopPropagation();
     });
 

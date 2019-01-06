@@ -22,7 +22,10 @@
         SELECT  t.TNId,t.TNAuthor_id,t.TN_Date,t.TN_Title,t.TN_Content,t.TN_Status,t.TN_Pics,t.TNHit_Number,t.TNCity,
         u.UId,u.UName,u.UIcon
         FROM tn t,users u
-        where t.TNAuthor_id=u.UId
+        <where>
+            t.TNAuthor_id=u.UId
+            and TN_Status=#{TN_Status}
+        </where>
         ORDER BY TNHit_Number
         DESC
     </select>
@@ -34,6 +37,8 @@
             t.TNAuthor_id=u.UId
             and t.TNCity=#{TNCity}
         </where>
+        ORDER BY TNHit_Number
+        DESC
     </select>
     <insert id="insertTravelNote" useGeneratedKeys="true" keyProperty="TNId"
             keyColumn="TNId" parameterType="com.niit.travel.entity.tn">
