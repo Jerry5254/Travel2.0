@@ -1,13 +1,13 @@
 #main-content {
     width: 520px;
-    height: 420px;
+    height: 450px;
     margin-bottom: 30px;
     margin-top: 110px;
 }
 
 #register-user {
     width: 250px;
-    height: 420px;
+    height: 450px;
     float: right;
     border: 1px solid grey;
     display: block;
@@ -16,7 +16,7 @@
 #pic {
     float: left;
     width: 250px;
-    height: 420px;
+    height: 450px;
     float: left;
     display: block;
     border: 1px solid black;
@@ -28,16 +28,16 @@ img {
 }
 
 #register-table {
-    margin-top: 20px;
-    margin-left: 40px;
+    margin-top: 8px;
+    margin-left: 20px;
 }
 
 #register-table div {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 #register-button {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 button {

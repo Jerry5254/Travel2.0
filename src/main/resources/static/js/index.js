@@ -20,20 +20,20 @@ $(function () {
         $('#SH').css({"background-color": " #1a4029", "color": "white"});
         getFood("上海");
     });
-    $('#NJ').click(function () {
+    $('#XJ').click(function () {
         $('#city-food button').css({"background-color": " white", "color": "black"});
-        $('#NJ').css({"background-color": " #1a4029", "color": "white"});
-        getFood("南京");
+        $('#XJ').css({"background-color": " #1a4029", "color": "white"});
+        getFood("香港");
     });
-    $('#XA').click(function () {
+    $('#SZ').click(function () {
         $('#city-food button').css({"background-color": " white", "color": "black"});
-        $('#XA').css({"background-color": " #1a4029", "color": "white"});
-        getFood("西安");
+        $('#SZ').css({"background-color": " #1a4029", "color": "white"});
+        getFood("深圳");
     });
-    $('#SC').click(function () {
+    $('#BJ').click(function () {
         $('#city-food button').css({"background-color": " white", "color": "black"});
-        $('#SC').css({"background-color": " #1a4029", "color": "white"});
-        getFood("四川");
+        $('#BJ').css({"background-color": " #1a4029", "color": "white"});
+        getFood("北京");
     });
     $('#Other').click(function () {
         $('#city-food button').css({"background-color": " white", "color": "black"});

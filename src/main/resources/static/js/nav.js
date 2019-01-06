@@ -30,13 +30,24 @@ $(function () {
             if (data.success) {
                 var cityHtml = '';
                 data.cityList.map(function (item, index) {
-                    cityHtml += '<li role="presentation" ><a role="menuitem" tabindex="-1" href="/travel/city/getcity?cityId=' + item.cid + '' + '" data-id="' + item.cid + '">' + item.cname + '</a></li>';
+                    cityHtml += '<li role="presentation" ><a role="menuitem" href="javascript:void(0);" tabindex="-1" data-id="' + item.cid + '">' + item.cname + '</a></li>';
 
                 });
                 $('#city-nav').html(cityHtml);
             }
         });
     }
+
+    $('#city-nav').on('click', 'li a', function () {
+        var id = $(this).data('id');
+        $.ajax({
+            type: 'get',
+            url: '/travel/city/addpoint',
+            data: {"cityId": id}
+        });
+        $(location).attr('href', '/travel/city/getcity?cityId=' + id);
+        e.stopPropagation();
+    });
 
 
 })

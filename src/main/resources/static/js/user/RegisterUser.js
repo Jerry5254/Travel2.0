@@ -1,5 +1,4 @@
 $(function() {
-    alert("222");
     addUser();
     //vali();
 
@@ -73,25 +72,97 @@ $(function() {
             user.ugender = $('#user-gender option:selected').val();
             var userIcon = $('#user-icon')[0].files[0];
             var mail=$('#user-mail').val();
-            var formData = new FormData();
-            formData.append('userInfo', JSON.stringify(user));
-            formData.append('userIcon', userIcon);
-            formData.append("email",mail);
-            $.ajax({
-                url:registerUserUrl ,
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                cache: false,
-                success: function (data) {
-                    if (data.success) {
-                        alert('提交成功');
-                    } else {
-                        alert('提交失败'+data.errMsg);
+
+            IsEmail(user.umail);
+            checkMobile(user.umobile);
+            checkPSW(user.upwd);
+            checkName(user.uname);
+            checkConPwd(user.upwd, $('#user-conpassword').val());
+
+            if (IsEmail(user.umail) && checkMobile(user.umobile) && checkName(user.uname) && checkPSW(user.upwd) && checkIcon(userIcon) && checkConPwd(user.upwd, $('#user-conpassword').val())) {
+                var formData = new FormData();
+                formData.append('userInfo', JSON.stringify(user));
+                formData.append('userIcon', userIcon);
+                formData.append("email", mail);
+                $.ajax({
+                    url: registerUserUrl,
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    success: function (data) {
+                        if (data.success) {
+                            alert('提交成功');
+                        } else {
+                            alert('提交失败' + data.errMsg);
+                        }
                     }
-                }
-            });
+                });
+            }
         });
+    }
+
+    function IsEmail(str) {
+        if (str.length != 0) {
+            reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+            if (!reg.test(str)) {
+                $('#wrong-email').css({"display": "inline"});
+                return false;
+            } else {
+                $('#wrong-email').css({"display": "none"});
+                return true;
+            }
+        }
+    }
+
+    function checkName(str) {
+        if (str.length != 0) {
+            reg = /^\w{2,10}$/g;
+            if (!reg.test(str)) {
+                $("#wrong-name").css({"display": "inline"});
+                return false;
+            } else {
+                $("#wrong-name").css({"display": "none"});
+                return true;
+            }
+        }
+    }
+
+    function checkPSW(str) {
+        if (str.length != 0) {
+            reg = /^\w{6,16}$/g;
+            if (!reg.test(str)) {
+                $('#wrong-pwd').css({"display": "inline"});
+                return false;
+            } else {
+                $('#wrong-pwd').css({"display": "none"});
+                return true;
+            }
+        }
+    }
+
+    function checkConPwd(pwd, conpwd) {
+        if (pwd == conpwd) {
+            $('#wrong-conpwd').css({"display": "none"});
+            return true;
+        } else {
+            $('#wrong-conpwd').css({"display": "inline"});
+            return false;
+        }
+    }
+
+
+    function checkMobile(str) {
+        if (str.length != 0) {
+            reg = /^1\d{10}$/;
+            if (!reg.test(str)) {
+                $('#wrong-mobile').css({"display": "inline"});
+                return false;
+            } else {
+                $('#wrong-mobile').css({"display": "none"});
+                return true;
+            }
+        }
     }
 })
