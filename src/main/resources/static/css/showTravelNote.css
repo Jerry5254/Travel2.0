@@ -8,7 +8,7 @@
     text-align: center;
     font-family: Arial, Helvetica, Tahoma, Verdana, Sans-Serif;
     font-size: 40px;
-    width: 752px;
+    width: 943px;
     height: 80px;
     background-color:rgba(255,255,255,0.6);
     position: absolute;
@@ -24,7 +24,7 @@
 }
 #collect{
     position: absolute;
-    margin-left: 700px;
+    margin-left: 850px;
 }
 #otherInfo{
     margin-bottom: 5px;
