@@ -40,7 +40,7 @@
             <div class="control-group">
                 <label class="control-label v-top"><b style="color: #f00;">*</b><span style="padding:0 5px 0 0;">用</span><span style="padding:0 5px 0 0;">户</span>名：</label>
                 <div class="controls">
-                    <input type="text" value="" class="input-xlarge" name="uname" placeholder="请输入用户名.." id="user-name"><br/>
+                    <input type="text" value="" class="input-xlarge" name="uname" placeholder="请输入用户名.." id="user-name" maxlength="20" required="true"><br/>
                     <p id="wrong-name" style="font-size: 7px;color:red;margin:0;padding:0;display: none">
                         只允许2-10位英文字母、数字或者下画线！</p>
                 </div>
@@ -49,7 +49,7 @@
                 <label class="control-label v-top"><b style="color: #f00;">*</b> <span style="padding:0 16px 0 0;">邮</span>箱：</label>
                 <div class="controls">
                     <input type="text" value="" class="input-xlarge" name="email" placeholder="请输入邮箱.."
-                           id="user-mail"><br/>
+                           id="user-mail" required="required"><br/>
                     <p id="wrong-email" style="font-size: 7px;color:red;margin:0;padding:0;display: none">
                         您输入的邮箱格式不正确!</p>
                 </div>
@@ -58,7 +58,7 @@
                 <label class="control-label v-top"><b style="color: #f00;">*</b> <span style="padding:0 16px 0 0;">密</span>码：</label>
                 <div class="controls">
                     <input type="password" value="" class="input-xlarge" name="upass" placeholder="请输入密码.."
-                           id="user-password"><br/>
+                           id="user-password" required="required"><br/>
                     <p id="wrong-pwd" style="font-size: 7px;color:red;margin:0;padding:0;display: none">
                         只允许6-16位英文字母、数字或者下画线！</p>
                 </div>
@@ -67,7 +67,7 @@
                 <label class="control-label v-top"><b style="color: #f00;">*</b> <span style="padding:0 16px 0 0;">确认密码：</label>
                 <div class="controls">
                     <input type="password" value="" class="input-xlarge" name="conpass" placeholder="请确认密码.."
-                           id="user-conpassword"><br/>
+                           id="user-conpassword" required="required"><br/>
                     <p id="wrong-conpwd" style="font-size: 7px;color:red;margin:0;padding:0;display: none">
                         您两次输入的密码不一样哦</p>
                 </div>
@@ -87,7 +87,7 @@
                 <label class="control-label v-top"><b style="color: #f00;">*</b> 联系方式：</label>
                 <div class="controls">
                     <input type="text" value="" class="input-xlarge" name="phone" placeholder="请输入联系方式.."
-                           id="user-phone"><br/>
+                           id="user-phone" required="required"><br/>
                     <p id="wrong-mobile" style="font-size: 7px;color:red;margin:0;padding:0;display: none">
                         您输入的电话有误</p>
                 </div>

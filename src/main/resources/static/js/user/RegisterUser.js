@@ -47,7 +47,7 @@ $(function() {
         $.validator.addMethod("checkName",function(value,element,params){
             var checkName = /^\w{2,10}$/g;
             return this.optional(element)||(checkName.test(value));
-        },"*只允许2-10位英文字母、数字或者下画线！");
+        },"*只允许2-20位英文字母、数字或者中文！");
         //验证手机号
         $.validator.addMethod("mobile", function(value, element,params) {
             var length = value.length;
@@ -79,7 +79,7 @@ $(function() {
             checkName(user.uname);
             checkConPwd(user.upwd, $('#user-conpassword').val());
 
-            if (IsEmail(user.umail) && checkMobile(user.umobile) && checkName(user.uname) && checkPSW(user.upwd) && checkIcon(userIcon) && checkConPwd(user.upwd, $('#user-conpassword').val())) {
+            if (IsEmail(user.umail) && checkMobile(user.umobile) && checkName(user.uname) && checkPSW(user.upwd) && checkConPwd(user.upwd, $('#user-conpassword').val())) {
                 var formData = new FormData();
                 formData.append('userInfo', JSON.stringify(user));
                 formData.append('userIcon', userIcon);
@@ -94,6 +94,7 @@ $(function() {
                     success: function (data) {
                         if (data.success) {
                             alert('提交成功');
+                            window.location.href='/travel';
                         } else {
                             alert('提交失败' + data.errMsg);
                         }
@@ -118,7 +119,7 @@ $(function() {
 
     function checkName(str) {
         if (str.length != 0) {
-            reg = /^\w{2,10}$/g;
+            reg = /^[A-Za-z0-9\u4e00-\u9fa5]+$/;
             if (!reg.test(str)) {
                 $("#wrong-name").css({"display": "inline"});
                 return false;

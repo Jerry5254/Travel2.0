@@ -265,8 +265,19 @@ body{
 #history-select:hover{
     background-color: #0000cc;
 }
-.seleted-his{
-    padding:1px 1px 1px 1px;
-    border-style:groove;
-    border-color:green;
+.seleted-his {
+    padding: 1px 1px 1px 1px;
+    border-style: groove;
+    border-color: green;
+}
+#index{
+    width: 100%;
+    height: 40px;
+    background-color: darkcyan;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+}
+#index:hover{
+    background-color: grey;
 }

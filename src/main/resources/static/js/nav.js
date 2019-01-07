@@ -55,7 +55,7 @@ $(function () {
                 console.log(data.success);
                 if (data.success) {
                     alert('退出登录成功！');
-                    isLogin();
+                    window.location.href='/travel';
                 }
             });
         }

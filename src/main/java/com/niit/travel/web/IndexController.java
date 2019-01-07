@@ -8,6 +8,8 @@ package com.niit.travel.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class IndexController {
     @RequestMapping(value = "/index")
@@ -32,7 +34,16 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/admin")
-    public String showAdmin() {
-        return "Admin";
+    public String showAdmin(HttpSession session) {
+        Integer id= (Integer) session.getAttribute("id");
+        if(id!=null){
+            if(id==1){
+                return "Admin";
+            }else{
+                return "index";
+            }
+        }else{
+            return "index";
+        }
     }
 }

@@ -110,7 +110,7 @@ public class tnController {
         return modelMap;
     }
 
-    //获取所有游记
+    //获取所有公开的游记
     @ResponseBody
     @RequestMapping(value="/getalltn",method = RequestMethod.GET)
     private Map<String,Object> getalltn(){
@@ -120,6 +120,22 @@ public class tnController {
         if(tnlist!=null){
             modelMap.put("success",true);
             modelMap.put("tnlist",tnlist);
+        }else{
+            modelMap.put("success",false);
+            modelMap.put("errMsg","获取失败！");
+        }
+        return modelMap;
+    }
+
+    //获取所有的游记
+    @ResponseBody
+    @RequestMapping(value="/getalltnall",method = RequestMethod.GET)
+    private Map<String,Object> getallrealtnall(){
+        Map<String,Object>modelMap=new HashMap<String,Object>();
+        List<tn> tn=tnservice.getAllTravelNote();
+        if(tn!=null){
+            modelMap.put("success",true);
+            modelMap.put("tn",tn);
         }else{
             modelMap.put("success",false);
             modelMap.put("errMsg","获取失败！");
@@ -229,10 +245,12 @@ public class tnController {
     private Map<String,Object> tncity(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         String city=request.getParameter("cityname");
-        List<tn> tnlist=tnservice.getTravelNoteByCity(city);
+        String status="公开";
+        List<tn> tnlist=tnservice.getTravelNoteByCity(city,status);
         modelMap.put("success",true);
         modelMap.put("tncitylist",tnlist);
         return modelMap;
     }
+
 
 }

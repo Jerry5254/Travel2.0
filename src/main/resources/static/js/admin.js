@@ -5,6 +5,7 @@ $(function () {
     var registerCityUrl = '/travel/city/addcity';
 
     getCityList(getAllCityListUrl);
+    gettnList();
 
     $('#food-button').click(function () {
         $('#left-space li').css({"color": "white"});
@@ -116,6 +117,21 @@ $(function () {
         });
     });
 
+    function gettnList(){
+        var url='/travel/tn/getalltnall';
+        $.getJSON(url, function (data) {
+            if (data.success) {
+                var html='';
+                data.tn.map(function (item, index) {
+                    html+='<tr><td>'+item.tnid+'</td><td><a href="/travel/tn/totravelnote?travelnoteid='+item.tnid+'" >'+item.tn_Title+'</a></td><td>'+item.tn_Status+'</td>' +
+                        '<td>'+item.tn_Date+'</td><td>'+item.tnhit_Number+'</td><td>'+item.users.uname+'</td>' +
+                        '<td><a href="javascript:void(0);" data-id="' + item.tnid+'">删除</a></td></tr>'
+                });
+                $('#tnlist').html(html);
+            }
+        });
+    }
+
     function getCityList(url) {
         $.getJSON(url, function (data) {
             if (data.success) {
@@ -150,6 +166,27 @@ $(function () {
 
     }
 
+
+    //删除游记
+    $('#tnlist').on('click', 'a,li', function (e) {
+        $("a").attr('disabled', 'true');
+        var id = $(this).attr('data-id');
+        var operation = $(this).text();
+        if (operation == "删除") {
+            $.ajax({
+                url: '/travel/tn/deletetn',
+                type: 'post',
+                data: {"tnid": id},
+                success: function (data) {
+                    if (data.success) {
+                        alert("删除成功");
+                    }else{
+                        alert("删除失败："+data.errMsg);
+                    }
+                }
+            })
+        }
+    });
 
     //删除城市方法
     $('#show-citylist').on('click', 'a,li', function (e) {

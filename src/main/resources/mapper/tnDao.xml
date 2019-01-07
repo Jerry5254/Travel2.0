@@ -36,6 +36,7 @@
         <where>
             t.TNAuthor_id=u.UId
             and t.TNCity=#{TNCity}
+            and t.TN_Status=#{TN_Status}
         </where>
         ORDER BY TNHit_Number
         DESC
@@ -88,5 +89,14 @@
         FROM tn
         WHERE
         TN_Status=#{TN_Status}
+    </select>
+    <select id="queryTravelNoteAll" resultMap="TnTousers">
+        SELECT  t.TNId,t.TNAuthor_id,t.TN_Date,t.TN_Title,t.TN_Content,t.TN_Status,t.TN_Pics,t.TNHit_Number,t.TNCity,
+        u.UId,u.UName,u.UIcon
+        FROM tn t,users u
+        WHERE
+        t.TNAuthor_id=u.UId
+        ORDER BY TNHit_Number
+        DESC
     </select>
 </mapper>

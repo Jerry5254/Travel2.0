@@ -99,8 +99,13 @@ public class tnServiceImpl implements tnService {
     }
 
     @Override
-    public List<tn> getTravelNoteByCity(String tncity) {
-        return tndao.queryTravelNoteByCity(tncity);
+    public List<tn> getTravelNoteByCity(String tncity,String status) {
+        return tndao.queryTravelNoteByCity(tncity,status);
+    }
+
+    @Override
+    public List<tn> getAllTravelNote() {
+        return tndao.queryTravelNoteAll();
     }
 
     //向数据库中插入封面

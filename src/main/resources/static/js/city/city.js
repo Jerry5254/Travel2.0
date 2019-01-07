@@ -2,6 +2,61 @@ $(function () {
     var cityId = getQueryString("cityId");
     var cityInfoUrl = '/travel/city/city_id';
 
+    var registerCityUrl = '/travel/city/addcity';
+
+
+    $supDialog = $('#J_addsuppliersDialog');
+    $supDialog.on('click', '.J_addOneSupplier', function (e) {
+        $supDialog.modal('shadeIn');
+        var city = {};
+        city.cname = $('#new-city-name').val();
+        city.cdes = $('#new-city-desc').val();
+
+        var formData = new FormData();
+        formData.append("newCityInfo", JSON.stringify(city));
+        return $.confirm({
+            title: '确认',
+            body: '您确认申请这个城市吗？',
+            backdrop: false,
+            okHide: function () {
+                $.ajax({
+                    url: registerCityUrl,
+                    type: 'post',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    success: function (data) {
+                        if (data.success) {
+                            $.alert({
+                                hasfoot: false,
+                                backdrop: false,
+                                title: '系统提示',
+                                body: '<div style="height: 50px;color:darkred;margin: 0 auto;">您已提交</div>',
+                                timeout: 1000,
+                                width: 250,
+                                height: 100,
+                            });
+                        } else {
+                            $.alert({
+                                hasfoot: false,
+                                backdrop: false,
+                                title: '系统提示',
+                                body: '<div style="height: 50px;color:darkred;margin: 0 auto;">' + data.errMsg + '</div>',
+                                timeout: 1000,
+                                width: 250,
+                                height: 100,
+                            });
+                        }
+                    }
+                });
+            },
+            hide: function () {
+                return $supDialog.modal('shadeOut');
+            }
+        });
+    });
+
 
 
 

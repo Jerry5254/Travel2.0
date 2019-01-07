@@ -142,13 +142,14 @@ $(function() {
             if (data.success) {
                 if ((data.scorelist) != null) {
                     var scoreTableHtml = '';
+                    var table='<table id="scoretable" style="width: 300px;height:50px;margin: 0 auto;" border="1">' +
+                        '<tr class="head"><td>游记编号</td><td>分数</td></tr>';
+                    var table2='</table>';
                     data.scorelist.map(function (item, index) {
-                        scoreTableHtml += '<table><tr class="head"><td>游记编号</td><td>分数</td></tr>' +
-                            '<tr><td><a href="/travel/tn/totravelnote?travelnoteid=' + item.scnote_id + '" >' + item.scnote_id + '</a></td>' +
-                            '<td>' + item.scscore + '</td>' +
-                            '</tr></table>';
+                        scoreTableHtml +='<tr><td><a href="/travel/tn/totravelnote?travelnoteid=' + item.scnote_id + '" >' + item.scnote_id + '</a></td>' +
+                            '<td>' + item.scscore + '</td></tr>';
                     });
-                    $('#scoreNote').html(scoreTableHtml);
+                    $('#scoreNote').html(table+scoreTableHtml+table2);
                 } else {
                     var html = '您还没有为游记评过分！';
                     $('#scoreNote').html(html);
@@ -345,7 +346,7 @@ $(function() {
             $('#mage-score').removeClass("active");
             $('#userInfo').attr("style","display:block");
             $('#showcomment').attr("style","display:none");
-            $('#scoreNote').attr("style","display:none");
+            $('#showscore').attr("style","display:none");
         });
 
         $('#mage-com').click(function(){
@@ -354,7 +355,7 @@ $(function() {
             $('#mage-score').removeClass("active");
             $('#userInfo').attr("style","display:none");
             $('#showcomment').attr("style","display:block");
-            $('#scoreNote').attr("style","display:none");
+            $('#showscore').attr("style","display:none");
         });
 
         $('#mage-score').click(function(){
@@ -363,7 +364,7 @@ $(function() {
             $('#mage-score').addClass("active");
             $('#userInfo').attr("style","display:none");
             $('#showcomment').attr("style","display:none");
-            $('#scoreNote').attr("style","display:block");
+            $('#showscore').attr("style","display:block");
         });
 
     }
